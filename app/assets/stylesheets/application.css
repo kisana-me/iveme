@@ -1,0 +1,29 @@
+html, body {
+  margin: 0;
+}
+* {
+  box-sizing: border-box;
+}
+a {
+  display: inline-block;
+}
+header {
+  height: 60px;
+  padding: .5rem 1rem;
+  border-bottom: 1px solid #000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background: #ffffff82;
+  backdrop-filter: blur(3px);
+}
+main {
+  min-height: 100svh;
+  padding: 1rem;
+}
+footer {
+  border-top: 1px solid #000000;
+  padding: .5rem 1rem;
+}

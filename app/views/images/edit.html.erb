@@ -1,0 +1,3 @@
+<% provide(:title, "画像を編集") %>
+
+<%= render "images/form", image: @image, url: image_path(@image.aid), method: :post, new: true %>

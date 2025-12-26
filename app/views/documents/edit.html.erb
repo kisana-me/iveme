@@ -1,0 +1,12 @@
+<% content_for :title, "文書を編集" %>
+
+<h1>文書を編集</h1>
+
+<%= render "form", document: @document %>
+
+<br>
+
+<div>
+  <%= link_to "詳細へ", document_path(@document.name_id) %> |
+  <%= link_to "一覧へ", documents_path %>
+</div>

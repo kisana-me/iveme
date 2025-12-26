@@ -1,0 +1,21 @@
+<% provide(:title, "サイトマップ") %>
+
+<% if @document %>
+  <h1><%= @document.title %></h1>
+  <%= md_render @document.content %>
+<% else %>
+  <h1>サイトマップ</h1>
+
+  <ul>
+    <li><%= link_to "トップページ", root_path %></li>
+    <li><%= link_to "アカウント一覧", accounts_path %></li>
+    <li><%= link_to "画像一覧", images_path %></li>
+  </ul>
+
+  <ul>
+    <li><%= link_to "利用規約", terms_of_service_path %></li>
+    <li><%= link_to "プライバシーポリシー", privacy_policy_path %></li>
+    <li><%= link_to "お問い合わせ", contact_path %></li>
+    <li><%= link_to "サイトマップ", sitemap_path %></li>
+  </ul>
+<% end %>

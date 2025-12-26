@@ -1,0 +1,36 @@
+<% provide(:title, "サインアップ") %>
+
+<h1>Appを開始する</h1>
+
+<p>ようこそ！以下の情報を確認して登録してください。</p>
+
+<%= form_with model: @account, url: signup_path, method: :post, data: { turbo: false } do |f| %>
+  <%= render "shared/error_messages", instead: @account %>
+
+  <div>
+    <%= f.label :name, "名前" %>
+    <%= f.text_field :name, value: session[:oauth_signup]["name"] %>
+  </div>
+
+  <div>
+    <%= f.label :name_id, "ID" %>
+    <%= f.text_field :name_id, value: session[:oauth_signup]["name_id"] %>
+  </div>
+
+  <div>
+    <%= f.label :description, "説明文" %>
+    <%= f.text_area :description, value: session[:oauth_signup]["description"] %>
+  </div>
+
+  <div>
+    <br />
+    アカウントを作成することで、当サービスの<br />
+    <%= link_to "利用規約", terms_of_service_path %>と<%= link_to "プライバシーポリシー", privacy_policy_path %>に<br />
+    同意したとみなされます。<br />
+    <br />
+  </div>
+
+  <div>
+    <%= f.submit "登録する" %>
+  </div>
+<% end %>

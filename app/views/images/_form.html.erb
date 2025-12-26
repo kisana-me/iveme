@@ -1,0 +1,24 @@
+<%= form_with model: @image, url: url, class: "ctmf", data: { turbo: false } do |f| %>
+  <%= render "shared/error_messages", instead: @image %>
+  <div>
+    <%= f.label :image, "image" %>
+    <%= f.file_field :image %>
+  </div>
+
+  <div>
+    <%= f.label :name, "名前" %>
+    <%= f.text_field :name, placeholder: "名前" %>
+  </div>
+
+  <div>
+    <%= f.label :visibility %>
+    <%= f.select :visibility, Image.visibilities.keys.map { |k| [t("activerecord.enums.image.visibility.#{k}"), k] }, {} %>
+  </div>
+
+  <div>
+    <%= f.label :status %>
+    <%= f.select :status, Image.statuses.keys.map { |k| [t("activerecord.enums.image.status.#{k}"), k] }, {} %>
+  </div>
+
+  <%= f.submit "送信" %>
+<% end %>

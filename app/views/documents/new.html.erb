@@ -1,0 +1,11 @@
+<% content_for :title, "文書を作成" %>
+
+<h1>文書を作成</h1>
+
+<%= render "form", document: @document %>
+
+<br>
+
+<div>
+  <%= link_to "一覧へ", documents_path %>
+</div>

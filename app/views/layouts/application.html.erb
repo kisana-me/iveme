@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title><%= full_title(yield(:title)) %></title>
+    <meta name="title" content="<%= full_title(yield(:title)) %>">
+    <meta name="description" content="App description">
+    <meta name="keywords" content="App keywords">
+    <meta name="robots" content="<%= content_for?(:robots) ? yield(:robots) : "index, follow" %>">
+    <meta name="googlebot" content="<%= content_for?(:robots) ? yield(:robots) : "index, follow" %>">
+
+    <meta name="theme-color" content="#ffffff">
+    <meta name="color-scheme" content="light">
+    <meta name="author" content="kisana">
+    <meta name="creator" content="kisana">
+    <meta name="publisher" content="kisana">
+    <meta name="generator" content="kisana app">
+    <meta name="application-name" content="App">
+
+    <meta property="og:url" content="<%= request.path %>">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="<%= full_title(yield(:title)) %>">
+    <meta property="og:description" content="<%= content_for?(:description) ? yield(:description) : "App description" %>">
+    <meta property="og:image" content="<%= full_url("/static-assets/images/app-1.png") %>">
+    <meta property="og:locale" content="ja_JP">
+    <meta property="og:site_name" content="App">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="App">
+    <meta name="twitter:site:id" content="app">
+    <meta name="twitter:title" content="<%= full_title(yield(:title)) %>">
+    <meta name="twitter:description" content="<%= content_for?(:description) ? yield(:description) : "App description" %>">
+    <meta name="twitter:image" content="<%= full_url("/static-assets/images/app-1.png") %>">
+    <meta name="twitter:image:alt" content="Appの画像">
+    <meta name="twitter:creator" content="kisana">
+    <meta name="twitter:creator:id" content="kisana_me">
+
+    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <meta http-equiv="content-language" content="<%= content_for?(:lang) ? yield(:lang) : "ja" %>">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="format-detection" content="email=no,telephone=no,address=no">
+    <meta name="turbo-prefetch" content="false">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
+    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+
+    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+
+    <% if Rails.env.production? && ga4_id = ENV.fetch("GA4_ID") %>
+      <!-- Google tag (gtag.js) -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-<%= ga4_id %>"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-<%= ga4_id %>");
+      </script>
+    <% end %>
+  </head>
+
+  <body>
+
+    <header>
+      <div>
+        <%= link_to("App", root_path) %>
+      </div>
+      <div>
+        <% if @current_account %>
+          名前: <%= link_to(@current_account.name, account_path(@current_account.name_id)) %>
+        <% else %>
+          <%= link_to('開始', sessions_start_path) %>
+        <% end %>
+      </div>
+    </header>
+
+    <main>
+      <%= yield %>
+    </main>
+
+    <div id="flash">
+      <%= render "shared/flash" %>
+    </div>
+
+    <footer>
+      <div>
+        <%= link_to("App", root_path) %>
+      </div>
+      <div>
+        <%= link_to("利用規約", terms_of_service_path) %>
+        <%= link_to("プライバシーポリシー", privacy_policy_path) %>
+        <%= link_to("お問い合わせ", contact_path) %>
+        <%= link_to("サイトマップ", sitemap_path) %>
+      </div>
+      <div>
+        <small>© App</small>
+      </div>
+    </footer>
+  </body>
+</html>

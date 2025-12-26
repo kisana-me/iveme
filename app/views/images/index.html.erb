@@ -1,0 +1,5 @@
+<% provide(:title, "画像一覧") %>
+
+<h1>画像一覧</h1>
+<%= render partial: "images/image", collection: @images, as: "image" %>
+<%= render "shared/paging", pages: @total_pages, page: @page, page_to: "/images" %>

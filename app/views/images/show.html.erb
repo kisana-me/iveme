@@ -1,0 +1,6 @@
+<% provide(:title, "画像") %>
+
+<h1>画像</h1>
+<%= image_tag(@image.image_url, alt: "#{@image.name}") %>
+<hr />
+<%= render "images/image", image: @image %>

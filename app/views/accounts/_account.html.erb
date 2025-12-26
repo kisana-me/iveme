@@ -1,0 +1,18 @@
+<div class="account">
+  <div class="account-plate">
+    <div class="account-icon">
+      <%= image_tag(account.icon_url, alt: "#{account.name}のアイコン") %>
+    </div>
+    <div class="account-names">
+      <div class="account-name">
+        <%= account.name %>
+      </div>
+      <div class="account-name_id">
+        @<%= account.name_id %>
+      </div>
+    </div>
+  </div>
+  <div class="account-description">
+    <%= account.description %>
+  </div>
+</div>

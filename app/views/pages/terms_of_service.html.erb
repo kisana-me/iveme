@@ -1,0 +1,12 @@
+<% provide(:title, "利用規約") %>
+
+<% if @document %>
+  <h1><%= @document.title %></h1>
+  <%= md_render @document.content %>
+<% else %>
+  <h1>利用規約</h1>
+
+  <p>本サービスの利用規約は、下記リンク先に記載しております。</p>
+
+  <a href="https://anyur.com/terms-of-service">ANYUR 利用規約</a>
+<% end %>

@@ -1,0 +1,36 @@
+.account {
+
+}
+.account-plate {
+  display: flex;
+}
+.account-icon {
+  width: 2rem;
+  height: 2rem;
+  background: #aaaaaa;
+  overflow: hidden;
+}
+.account-icon img {
+  width: 2rem;
+  height: 2rem;
+  object-fit: cover;
+}
+.account-names {
+  padding-left: 0.1em;
+  line-height: 1rem;
+}
+.account-name {
+  font-size: 0.9rem;
+}
+.account-name_id {
+  font-size: 0.8rem;
+}
+
+.account-linked {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+.account-linked:hover {
+  text-decoration: underline;
+}

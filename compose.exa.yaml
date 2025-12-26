@@ -1,0 +1,65 @@
+services:
+  app:
+    build: .
+    tty: true
+    stdin_open: true
+    restart: always
+    env_file:
+      - .env
+    working_dir: /app
+    volumes:
+      - .:/app
+    ports:
+      - 3000:3000
+    depends_on:
+      - mariadb
+      - minio
+    command: >
+      bash -c "rm -f /app/tmp/pids/server.pid &&
+      rm -rf /app/public/assets &&
+      gem cleanup &&
+      bundle install -j4 &&
+      RAILS_ENV=production rails assets:precompile &&
+      rails s -b 0.0.0.0"
+
+  mariadb:
+    image: mariadb:latest
+    tty: true
+    stdin_open: true
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - mariadb-vol:/var/lib/mysql
+    ports:
+      - 3306:3306
+
+  minio:
+    image: minio/minio:RELEASE.2025-04-22T22-12-26Z
+    tty: true
+    stdin_open: true
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - minio-vol:/data
+    ports:
+      - 9000:9000
+      - 9001:9001
+    command: server /data --console-address ":9001"
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    tty: true
+    stdin_open: true
+    restart: always
+    env_file:
+      - .env
+    depends_on:
+      - mariadb
+    ports:
+      - 8080:80
+
+volumes:
+  mariadb-vol:
+  minio-vol:
