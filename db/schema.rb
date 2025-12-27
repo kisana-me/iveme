@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 6) do
+ActiveRecord::Schema[8.1].define(version: 7) do
   create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_uca1400_ai_ci", force: :cascade do |t|
     t.string "aid", limit: 14, null: false
     t.bigint "banner_id"
@@ -91,6 +91,27 @@ ActiveRecord::Schema[8.1].define(version: 6) do
     t.check_constraint "json_valid(`meta`)", name: "meta"
   end
 
+  create_table "pages", charset: "utf8mb4", collation: "utf8mb4_uca1400_ai_ci", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.string "aid", limit: 14, null: false
+    t.bigint "background_id"
+    t.datetime "created_at", null: false
+    t.text "description", default: "", null: false
+    t.bigint "icon_id"
+    t.text "meta", size: :long, default: "{}", null: false, collation: "utf8mb4_bin"
+    t.string "name_id", null: false
+    t.integer "status", limit: 1, default: 0, null: false
+    t.string "title", default: "", null: false
+    t.datetime "updated_at", null: false
+    t.integer "visibility", limit: 1, default: 0, null: false
+    t.index ["account_id"], name: "index_pages_on_account_id"
+    t.index ["aid"], name: "index_pages_on_aid", unique: true
+    t.index ["background_id"], name: "index_pages_on_background_id"
+    t.index ["icon_id"], name: "index_pages_on_icon_id"
+    t.index ["name_id"], name: "index_pages_on_name_id", unique: true
+    t.check_constraint "json_valid(`meta`)", name: "meta"
+  end
+
   create_table "sessions", charset: "utf8mb4", collation: "utf8mb4_uca1400_ai_ci", force: :cascade do |t|
     t.bigint "account_id", null: false
     t.string "aid", limit: 14, null: false
@@ -113,5 +134,8 @@ ActiveRecord::Schema[8.1].define(version: 6) do
   add_foreign_key "accounts", "images", column: "icon_id"
   add_foreign_key "images", "accounts"
   add_foreign_key "oauth_accounts", "accounts"
+  add_foreign_key "pages", "accounts"
+  add_foreign_key "pages", "images", column: "background_id"
+  add_foreign_key "pages", "images", column: "icon_id"
   add_foreign_key "sessions", "accounts"
 end
