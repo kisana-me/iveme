@@ -3,6 +3,7 @@ class Account < ApplicationRecord
   has_many :images
   has_many :oauth_accounts
   belongs_to :icon, class_name: "Image", optional: true
+  has_many :pages
 
   attribute :meta, :json, default: -> { {} }
   enum :visibility, { opened: 0, limited: 1, closed: 2 }

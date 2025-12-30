@@ -1,4 +1,35 @@
 class PagesController < ApplicationController
+  def show
+    @page = Page.find_by!(name_id: params[:name_id])
+  end
+
+  def new
+    @page = Page.new
+  end
+
+  def create
+    @page = Page.new(page_params)
+    @page.account = @current_account
+    if @page.save
+      redirect_to page_path(@page.name_id), notice: "ページを作成しました"
+    else
+      render :new
+    end
+  end
+
+  def edit
+    @page = Page.find_by!(aid: params[:aid])
+  end
+
+  def update
+    @page = Page.find_by!(aid: params[:aid])
+    if @page.update(page_params)
+      redirect_to page_path(@page.name_id), notice: "ページを更新しました"
+    else
+      render :edit
+    end
+  end
+
   def index
     @document = Document.unscoped.find_by(name_id: "index", status: :specific)
   end
@@ -17,5 +48,19 @@ class PagesController < ApplicationController
 
   def sitemap
     @document = Document.unscoped.find_by(name_id: "sitemap", status: :specific)
+  end
+
+  private
+
+  def page_params
+    params.expect(
+      page: [
+        :name_id,
+        :title,
+        :description,
+        :color,
+        :size
+      ]
+    )
   end
 end

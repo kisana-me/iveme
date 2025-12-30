@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get "privacy-policy" => "pages#privacy_policy"
   get "contact" => "pages#contact"
   get "sitemap" => "pages#sitemap"
+  resources :pages, except: [ :index, :show ], param: :aid
+  resources :pages, only: [ :show ], param: :name_id
 
   # Accounts
   get "/@:name_id" => "accounts#show", as: :account
