@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   resources :pages, except: [ :index, :show ], param: :aid
   resources :pages, only: [ :show ], param: :name_id
 
+  # Blocks
+  resources :blocks, except: [ :index, :show ], param: :aid
+
   # Accounts
   get "/@:name_id" => "accounts#show", as: :account
   resources :accounts, only: [ :index ], param: :aid
