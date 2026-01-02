@@ -1,4 +1,6 @@
 class PagesController < ApplicationController
+  before_action :require_signin, only: %i[new create edit update]
+
   def show
     @page = Page.find_by!(name_id: params[:name_id])
   end
