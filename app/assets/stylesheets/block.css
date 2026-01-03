@@ -1,0 +1,55 @@
+/* BLOCK */
+
+.block {
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 1px solid #ccc;
+}
+.block:hover {
+  background-color: #f9f9f9;
+}
+.block h3, .block p {
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+  overflow-wrap: break-word;
+}
+.block-url {
+  font-size: 0.8rem;
+  overflow-wrap: anywhere;
+}
+
+/* FORM */
+
+.block-form {
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 1px solid #ccc;
+}
+.block-form > div {
+  display: flex;
+  flex-direction: column;
+}
+.block-form > div:not(:last-child) {
+  margin-bottom: 0.7rem;
+}
+.block-form label {
+  font-size: 0.7rem;
+  font-weight: bold;
+}
+.block-form input[type="text"], .block-form textarea {
+  font-size: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.block-form input[type="submit"] {
+  align-self: flex-start;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
