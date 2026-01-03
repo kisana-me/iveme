@@ -1,5 +1,6 @@
 class Page < ApplicationRecord
   belongs_to :account
+  has_many :blocks, dependent: :destroy
 
   attribute :meta, :json, default: -> { {} }
   enum :visibility, { opened: 0, limited: 1, closed: 2 }

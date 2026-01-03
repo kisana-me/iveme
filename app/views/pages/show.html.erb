@@ -10,6 +10,20 @@
   <strong>更新日:</strong> <%= @page.updated_at.strftime("%Y-%m-%d") %>
 </div>
 
+<hr />
+
 <div>
   <%= md_render @page.description %>
+</div>
+
+<hr />
+
+<%= turbo_frame_tag "new_block" do %>
+  <%= link_to "ブロック追加", new_block_path(page_aid: @page.aid), data: { turbo_frame: "new_block" } %>
+<% end %>
+
+<div id="blocks">
+  <%= turbo_frame_tag "blocks" do %>
+    <%= render partial: "blocks/block", collection: @page.blocks, as: "block" %>
+  <% end %>
 </div>

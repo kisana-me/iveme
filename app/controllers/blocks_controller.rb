@@ -3,6 +3,8 @@ class BlocksController < ApplicationController
 
   def new
     @block = Block.new
+    @page = Page.find_by!(aid: params[:page_aid])
+    render turbo_stream: turbo_stream.update("new_block", partial: "form", locals: { block: @block, page_aid: params[:page_aid] })
   end
 
   def create
@@ -10,22 +12,24 @@ class BlocksController < ApplicationController
     @block = Block.new(block_params)
     @block.page = @page
     if @block.save
-      flash.now[:notice] = "追加しました"
+      render :create, formats: :turbo_stream
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_entity, formats: :turbo_stream
     end
   end
 
   def edit
     @block = Block.find_by!(aid: params[:aid])
+    # render turbo_stream: turbo_stream.update("block_#{@block.aid}", partial: "form", locals: { block: @block })
   end
 
   def update
     @block = Block.find_by!(aid: params[:aid])
     if @block.update(block_params)
       flash.now[:notice] = "更新しました"
+      # render turbo_stream: turbo_stream.update?replace?("block_#{@block.aid}", partial: "block", locals: { block: @block })
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_entity, formats: :turbo_stream
     end
   end
 
@@ -35,7 +39,10 @@ class BlocksController < ApplicationController
     params.expect(
       block: [
         :title,
-        :description
+        :description,
+        :url,
+        :visibility,
+        :status
       ]
     )
   end

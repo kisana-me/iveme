@@ -1,0 +1,19 @@
+<%= turbo_frame_tag "block_#{block.aid}" do %>
+  <div class="block" id="block_<%= block.aid %>">
+    <% if block.title.present? %>
+      <h3><%= block.title %></h3>
+    <% end %>
+
+    <% if block.description.present? %>
+      <p>
+        <%= block.description %>
+      </p>
+    <% end %>
+
+    <% if block.url.present? %>
+      <div class="block-url">
+        <a href="<%= block.url %>" target="_blank" rel="noopener"><%= block.url %></a>
+      </div>
+    <% end %>
+  </div>
+<% end %>
