@@ -24,6 +24,6 @@
 
 <div id="blocks">
   <%= turbo_frame_tag "blocks" do %>
-    <%= render partial: "blocks/block", collection: @page.blocks, as: "block" %>
+    <%= render partial: "blocks/block", collection: @page.blocks.is_normal.ordered, as: "block" %>
   <% end %>
 </div>

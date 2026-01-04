@@ -15,5 +15,14 @@
         <a href="<%= block.url %>" target="_blank" rel="noopener"><%= block.url %></a>
       </div>
     <% end %>
+
+    <% if block.page.account == @current_account %>
+      <div>
+        <%= link_to "Edit", edit_block_path(block.aid), class: "" %>
+        <%= button_to "Delete", block_path(block.aid), method: :delete, data: { confirm: "Are you sure?" }, class: "" %>
+        <%= button_to "▲", up_block_path(block.aid), method: :patch, class: "" %>
+        <%= button_to "▼", down_block_path(block.aid), method: :patch, class: "" %>
+      </div>
+    <% end %>
   </div>
 <% end %>

@@ -2,7 +2,7 @@ class PagesController < ApplicationController
   before_action :require_signin, only: %i[new create edit update]
 
   def show
-    @page = Page.find_by!(name_id: params[:name_id])
+    @page = Page.is_normal.find_by!(name_id: params[:name_id])
   end
 
   def new
@@ -20,11 +20,11 @@ class PagesController < ApplicationController
   end
 
   def edit
-    @page = Page.find_by!(aid: params[:aid])
+    @page = Page.is_normal.find_by!(aid: params[:aid])
   end
 
   def update
-    @page = Page.find_by!(aid: params[:aid])
+    @page = Page.is_normal.find_by!(aid: params[:aid])
     if @page.update(page_params)
       redirect_to page_path(@page.name_id), notice: "ページを更新しました"
     else
