@@ -17,7 +17,11 @@ class Block < ApplicationRecord
     length: { in: 1..10_000 }
   validates :url,
     allow_blank: true,
-    length: { in: 1..250 }
+    length: { in: 1..250 },
+    format: {
+      with: /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/,
+      message: "は有効なURLではありません"
+    }
 
   scope :ordered, -> { order(position: :asc) }
   scope :is_normal, -> { where(status: :normal) }
