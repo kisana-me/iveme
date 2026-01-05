@@ -1,26 +1,27 @@
 <% content_for :title, @page.title %>
 
+<style>
+  main {
+    background-image: url('<%= @page.background_url %>');
+    background-size: cover;
+    background-position: center;
+  }
+</style>
+
+<% if @page.account == @current_account %>
+  <div class="page-owner">
+    <p>あなたはこのページの所有者です。</p>
+    <%= link_to "編集", edit_page_path(@page.aid) %>
+  </div>
+<% end %>
+
+<%= image_tag(@page.icon_url, alt: "#{@page.title}のアイコン", class: "page-icon") %>
+
 <h1><%= @page.title %></h1>
-
-<div>
-  <strong>ID:</strong> <%= @page.name_id %>
-  <br />
-  <strong>公開日:</strong> <%= @page.created_at.strftime("%Y-%m-%d") %>
-  <br />
-  <strong>更新日:</strong> <%= @page.updated_at.strftime("%Y-%m-%d") %>
-  <% if @page.account == @current_account %>
-    <br />
-    <strong>編集:</strong> <%= link_to "編集", edit_page_path(@page.aid) %>
-  <% end %>
-</div>
-
-<hr />
 
 <div>
   <%= md_render @page.description %>
 </div>
-
-<hr />
 
 <div id="blocks">
   <%= turbo_frame_tag "blocks" do %>

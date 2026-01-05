@@ -2,6 +2,16 @@
   <%= render "shared/error_messages", instead: page %>
 
   <div>
+    <%= form.label :icon_file %>
+    <%= form.file_field :icon_file %>
+  </div>
+
+  <div>
+    <%= form.label :background_file %>
+    <%= form.file_field :background_file %>
+  </div>
+
+  <div>
     <%= form.label :name_id, "Page Id" %>
     <%= form.text_field :name_id %>
   </div>

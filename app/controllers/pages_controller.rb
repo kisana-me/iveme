@@ -69,8 +69,18 @@ class PagesController < ApplicationController
         :name_id,
         :title,
         :description,
-        :color,
-        :size
+        :font_family,
+        :font_weight,
+        :font_color,
+        :block_color,
+        :accent_color,
+        :background_color,
+        :gradient_color,
+        :page_type,
+        :icon_aid,
+        :icon_file,
+        :background_aid,
+        :background_file
       ]
     )
   end

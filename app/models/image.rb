@@ -8,7 +8,7 @@ class Image < ApplicationRecord
   attribute :visibility, default: "opened"
   enum :visibility, { opened: 0, limited: 1, closed: 2 }
   enum :status, { normal: 0, locked: 1, deleted: 2 }
-  attr_accessor :image
+  attr_accessor :image, :save_original
 
   after_initialize :set_aid, if: :new_record?
   before_create :image_upload

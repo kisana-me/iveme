@@ -1,0 +1,13 @@
+.page-owner {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  margin-bottom: 15px;
+  background-color: #f9f9f9;
+}
+.page-owner p {
+  margin: 0;
+}
+.page-icon {
+  width: 10rem;
+  border-radius: 50%;
+}

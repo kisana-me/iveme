@@ -1,5 +1,13 @@
 <% content_for :title, "ページを編集" %>
 
+<style>
+  main {
+    background-image: url('<%= @page.background_url %>');
+    background-size: cover;
+    background-position: center;
+  }
+</style>
+
 <h1>ページを編集</h1>
 
 <%= render "form", page: @page, url: page_path(@page.aid) %>
