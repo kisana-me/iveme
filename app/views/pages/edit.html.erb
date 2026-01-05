@@ -3,3 +3,21 @@
 <h1>ページを編集</h1>
 
 <%= render "form", page: @page, url: page_path(@page.aid) %>
+
+<%= button_to "ページを削除", page_path(@page.aid), method: :delete, data: { turbo_confirm: "ページを削除しますか？" }, class: "ctmf-button", style: "color: red;" %>
+
+<br />
+
+<%= link_to "ページへ", page_path(@page.name_id) %>
+
+<hr style="margin: 2rem 0;" />
+
+<%= turbo_frame_tag "new_block" do %>
+  <%= button_to "ブロック追加", new_block_path(), params: {page_aid: @page.aid}, method: :get, data: { turbo_frame: "new_block" }, class: "ctmf-button" %>
+<% end %>
+
+<div id="blocks">
+  <%= turbo_frame_tag "blocks" do %>
+    <%= render partial: "blocks/block", collection: @page.blocks.is_normal.ordered, as: "block", locals: { editable: true } %>
+  <% end %>
+</div>

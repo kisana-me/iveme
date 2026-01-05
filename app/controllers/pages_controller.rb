@@ -32,6 +32,15 @@ class PagesController < ApplicationController
     end
   end
 
+  def destroy
+    @page = Page.is_normal.find_by!(aid: params[:aid])
+    if @page.update(status: :deleted)
+      redirect_to root_path, notice: "ページを削除しました"
+    else
+      redirect_to page_path(@page.name_id), alert: "ページの削除に失敗しました"
+    end
+  end
+
   def index
     @document = Document.unscoped.find_by(name_id: "index", status: :specific)
   end

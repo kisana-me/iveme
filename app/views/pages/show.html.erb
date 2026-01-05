@@ -8,6 +8,10 @@
   <strong>公開日:</strong> <%= @page.created_at.strftime("%Y-%m-%d") %>
   <br />
   <strong>更新日:</strong> <%= @page.updated_at.strftime("%Y-%m-%d") %>
+  <% if @page.account == @current_account %>
+    <br />
+    <strong>編集:</strong> <%= link_to "編集", edit_page_path(@page.aid) %>
+  <% end %>
 </div>
 
 <hr />
@@ -17,10 +21,6 @@
 </div>
 
 <hr />
-
-<%= turbo_frame_tag "new_block" do %>
-  <%= link_to "ブロック追加", new_block_path(page_aid: @page.aid), data: { turbo_frame: "new_block" } %>
-<% end %>
 
 <div id="blocks">
   <%= turbo_frame_tag "blocks" do %>

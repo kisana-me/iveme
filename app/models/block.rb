@@ -1,3 +1,5 @@
+require 'uri'
+
 class Block < ApplicationRecord
   belongs_to :page
   belongs_to :image, optional: true

@@ -7,7 +7,7 @@ module ApplicationHelper
     URI.join(ENV.fetch("APP_URL"), path).to_s
   end
 
-  def md_render(md, safe: false)
+  def md_render(md, safe: true)
     ::MarkdownRenderer.render(md, safe: safe)
   end
 
