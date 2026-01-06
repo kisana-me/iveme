@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title><%= full_title(yield(:title)) %></title>
     <meta name="title" content="<%= full_title(yield(:title)) %>">
-    <meta name="description" content="App description">
-    <meta name="keywords" content="App keywords">
+    <meta name="description" content="自分だけのプロフィールページを簡単に作成・共有できるサービスです。">
+    <meta name="keywords" content="iveme, プロフィール, プロフィールページ, SNS, シェア, 作成, 無料">
     <meta name="robots" content="<%= content_for?(:robots) ? yield(:robots) : "index, follow" %>">
     <meta name="googlebot" content="<%= content_for?(:robots) ? yield(:robots) : "index, follow" %>">
 
@@ -15,23 +15,23 @@
     <meta name="creator" content="kisana">
     <meta name="publisher" content="kisana">
     <meta name="generator" content="kisana app">
-    <meta name="application-name" content="App">
+    <meta name="application-name" content="iveme">
 
     <meta property="og:url" content="<%= request.path %>">
     <meta property="og:type" content="website">
     <meta property="og:title" content="<%= full_title(yield(:title)) %>">
-    <meta property="og:description" content="<%= content_for?(:description) ? yield(:description) : "App description" %>">
+    <meta property="og:description" content="<%= content_for?(:description) ? yield(:description) : "自分だけのプロフィールページを簡単に作成・共有できるサービスです。" %>">
     <meta property="og:image" content="<%= full_url("/static-assets/images/app-1.png") %>">
     <meta property="og:locale" content="ja_JP">
-    <meta property="og:site_name" content="App">
+    <meta property="og:site_name" content="iveme">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="App">
-    <meta name="twitter:site:id" content="app">
+    <meta name="twitter:site" content="iveme">
+    <meta name="twitter:site:id" content="iveme">
     <meta name="twitter:title" content="<%= full_title(yield(:title)) %>">
-    <meta name="twitter:description" content="<%= content_for?(:description) ? yield(:description) : "App description" %>">
+    <meta name="twitter:description" content="<%= content_for?(:description) ? yield(:description) : "自分だけのプロフィールページを簡単に作成・共有できるサービスです。" %>">
     <meta name="twitter:image" content="<%= full_url("/static-assets/images/app-1.png") %>">
-    <meta name="twitter:image:alt" content="Appの画像">
+    <meta name="twitter:image:alt" content="ivemeの画像">
     <meta name="twitter:creator" content="kisana">
     <meta name="twitter:creator:id" content="kisana_me">
 
@@ -75,7 +75,7 @@
 
     <header>
       <div>
-        <%= link_to("App", root_path) %>
+        <%= link_to("iveme", root_path) %>
       </div>
       <div>
         <% if @current_account %>
@@ -96,7 +96,7 @@
 
     <footer>
       <div>
-        <%= link_to("App", root_path) %>
+        <%= link_to("iveme", root_path) %>
       </div>
       <div>
         <%= link_to("利用規約", terms_of_service_path) %>
@@ -105,7 +105,7 @@
         <%= link_to("サイトマップ", sitemap_path) %>
       </div>
       <div>
-        <small>© App</small>
+        <small>© iveme</small>
       </div>
     </footer>
   </body>

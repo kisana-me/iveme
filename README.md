@@ -1,6 +1,6 @@
-# IVEME
+# iveme
 
-![IVEMEの画像](https://kisana.me/images/iveme/iveme-1.png)
+![ivemeの画像](https://kisana.me/images/iveme/iveme-1.png)
 
 link in bio × 匿名質問
 

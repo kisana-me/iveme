@@ -1,6 +1,6 @@
 module ApplicationHelper
   def full_title(str)
-    (str.blank? ? "" : str + " | ") + "App"
+    (str.blank? ? "" : str + " | ") + "iveme"
   end
 
   def full_url(path)
