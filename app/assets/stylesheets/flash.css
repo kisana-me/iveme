@@ -13,6 +13,7 @@
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
   transition: opacity 0.3s;
   animation: flash-hide 3s forwards;
+  z-index: 1000;
 }
 .flash-message {
   width: 100%;

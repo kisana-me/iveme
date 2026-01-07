@@ -1,10 +1,92 @@
 <% provide(:title, "") %>
 
-<% if @document %>
-  <h1><%= @document.title %></h1>
-  <%= md_render @document.content %>
-<% else %>
-  <h1>Hello, App!</h1>
+<div class="lp" data-controller="landing-page" data-landing-page-target="animate">
+  <!-- Hero Section -->
+  <section class="lp-hero">
+    <div class="hero-text animate-on-scroll">
+      <h1 class="hero-title">
+        リンクを、<wbr>ひとつに。<br>
+        すべての自分に<wbr>アクセス。
+      </h1>
+      <p class="hero-subtitle">
+        リンクまとめも、質問フォームも。<br>
+        「iveme」なら、スマホひとつで<br>
+        とびきり自分らしいページが作れます🍭
+      </p>
+      <%= link_to root_path, class: "hero-action" do %>
+        🎀 無料でページを作成 🌟
+      <% end %>
+    </div>
+    <div class="hero-image animate-on-scroll" style="transition-delay: 0.2s;">
+      <img src="/static_assets/images/iveme-ss.png" alt="iveme Profile Mockup">
+    </div>
+  </section>
 
-  <p>kisanaによるWebアプリの雛形です。</p>
-<% end %>
+  <!-- Steps Section -->
+  <section class="lp-steps">
+    <h2 class="lp-h2 animate-on-scroll">3ステップで完了 🍬</h2>
+    <div class="lp-cards">
+      <div class="lp-card animate-on-scroll" style="transition-delay: 0.1s;">
+        <span class="step-number">1</span>
+        <h3>登録する</h3>
+        <p>ANYURアカウントで<br>サクッとサインイン</p>
+      </div>
+      <div class="lp-card animate-on-scroll" style="transition-delay: 0.2s;">
+        <span class="step-number">2</span>
+        <h3>デコる</h3>
+        <p>好きな色、写真、<br>デザインで飾ろう</p>
+      </div>
+      <div class="lp-card animate-on-scroll" style="transition-delay: 0.3s;">
+        <span class="step-number">3</span>
+        <h3>シェアする</h3>
+        <p>完成したURLを<br>みんなに教えよう</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="lp-features">
+    <h2 class="lp-h2 animate-on-scroll">できること 🔮</h2>
+    <div class="lp-cards">
+      <div class="lp-card animate-on-scroll">
+        <span class="feature-icon">🔗</span>
+        <h3 class="feature-title">リンクまとめ</h3>
+        <p>Instagram, X(Twitter), TikTok...<br>全部のリンクを可愛く整理。</p>
+      </div>
+      <div class="lp-card animate-on-scroll" style="transition-delay: 0.1s;">
+        <span class="feature-icon">🎁</span>
+        <h3 class="feature-title">質問フォーム</h3>
+        <p>推しへのメッセージや<br>日々の質問を受け付け。</p>
+      </div>
+      <div class="lp-card animate-on-scroll" style="transition-delay: 0.2s;">
+        <span class="feature-icon">🎨</span>
+        <h3 class="feature-title">カスタマイズ</h3>
+        <p>フォントも背景も自由自在。<br>自分だけの世界観を。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="lp-faq">
+    <h2 class="lp-h2 animate-on-scroll">よくある質問 Q&A</h2>
+    <div class="faq-list animate-on-scroll">
+      <details>
+        <summary>利用にお金はかかりますか？</summary>
+        <div class="faq-answer">
+          基本的に無料でご利用いただけます。より高度なカスタマイズ機能など、一部有料プランもご用意しています。
+        </div>
+      </details>
+      <details>
+        <summary>パソコンがなくても作れますか？</summary>
+        <div class="faq-answer">
+          はい！スマートフォンだけで全ての機能をご利用いただけます。
+        </div>
+      </details>
+      <details>
+        <summary>どのように使用するのでしょうか？</summary>
+        <div class="faq-answer">
+          あなたの様々なリンク先や質問フォームを設置し、SNSのプロフィールなどでivemeのページを共有できます。
+        </div>
+      </details>
+    </div>
+  </section>

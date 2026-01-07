@@ -28,3 +28,13 @@ footer {
   border-top: 1px solid #000000;
   padding: .5rem 1rem;
 }
+
+header > div:first-child, footer > div:first-child {
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+}
+header > div:first-child a, footer > div:first-child a {
+  color: #f42c70;
+  text-decoration: none;
+}
