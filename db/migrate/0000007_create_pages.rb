@@ -23,6 +23,6 @@ class CreatePages < ActiveRecord::Migration[8.1]
       t.timestamps
     end
     add_index :pages, :aid, unique: true
-    add_index :pages, :name_id, unique: true
+    add_index :pages, [ :account_id, :name_id ], unique: true
   end
 end

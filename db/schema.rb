@@ -113,23 +113,31 @@ ActiveRecord::Schema[8.1].define(version: 8) do
   end
 
   create_table "pages", charset: "utf8mb4", collation: "utf8mb4_uca1400_ai_ci", force: :cascade do |t|
+    t.string "accent_color", default: "", null: false
     t.bigint "account_id", null: false
     t.string "aid", limit: 14, null: false
+    t.string "background_color", default: "", null: false
     t.bigint "background_id"
+    t.string "block_color", default: "", null: false
     t.datetime "created_at", null: false
     t.text "description", default: "", null: false
+    t.string "font_color", default: "", null: false
+    t.string "font_family", default: "", null: false
+    t.string "font_weight", default: "", null: false
+    t.string "gradient_color", default: "", null: false
     t.bigint "icon_id"
     t.text "meta", size: :long, default: "{}", null: false, collation: "utf8mb4_bin"
     t.string "name_id", null: false
+    t.string "page_type", default: "", null: false
     t.integer "status", limit: 1, default: 0, null: false
     t.string "title", default: "", null: false
     t.datetime "updated_at", null: false
     t.integer "visibility", limit: 1, default: 0, null: false
+    t.index ["account_id", "name_id"], name: "index_pages_on_account_id_and_name_id", unique: true
     t.index ["account_id"], name: "index_pages_on_account_id"
     t.index ["aid"], name: "index_pages_on_aid", unique: true
     t.index ["background_id"], name: "index_pages_on_background_id"
     t.index ["icon_id"], name: "index_pages_on_icon_id"
-    t.index ["name_id"], name: "index_pages_on_name_id", unique: true
     t.check_constraint "json_valid(`meta`)", name: "meta"
   end
 
