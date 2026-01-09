@@ -2,12 +2,12 @@ Rails.application.routes.draw do
   root "pages#index"
 
   # Pages
+  get "home" => "pages#home", as: :home
   get "terms-of-service" => "pages#terms_of_service"
   get "privacy-policy" => "pages#privacy_policy"
   get "contact" => "pages#contact"
   get "sitemap" => "pages#sitemap"
   resources :pages, except: [ :index, :show ], param: :aid
-  resources :pages, only: [ :show ], param: :name_id
 
   # Blocks
   resources :blocks, except: [ :index, :show ], param: :aid do
@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 
   # Accounts
   get "/@:name_id" => "accounts#show", as: :account
+  get "/@:name_id/:page_name_id" => "accounts#page", as: :account_page
   resources :accounts, only: [ :index ], param: :aid
 
   # Images

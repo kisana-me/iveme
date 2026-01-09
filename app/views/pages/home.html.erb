@@ -1,0 +1,33 @@
+<% provide(:title, "ホーム") %>
+
+<h1>ホーム</h1>
+<p>ようこそ、<%= @current_account.name %> さん！</p>
+<p>あなたのページ一覧:</p>
+
+<div class="pages">
+  <% @pages.each do |page| %>
+    <%= link_to account_page_path(@current_account.name_id, page.name_id) do %>
+      <div>
+        <%= image_tag(page.icon_url, alt: "#{page.title}のアイコン", class: "page-icon") %>
+      </div>
+      <div>
+        <h2><%= page.title %></h2>
+        <p><%= page.description %></p>
+        <p><%= page.name_id %><%= page.name_id == "index" ? " (トップページ)" : "" %></p>
+      </div>
+    <% end %>
+  <% end %>
+  <% if @pages.empty? %>
+    <p>まだページがありません。下のボタンから新しいページを作成しましょう！</p>
+  <% end %>
+</div>
+
+<%= button_to "ページ作成", new_page_path, method: :get, class: "ctmf-button" %>
+
+<br /><br />
+
+<hr />
+
+<br /><br />
+
+<%= link_to "設定", settings_path %>

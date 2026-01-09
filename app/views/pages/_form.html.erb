@@ -12,8 +12,13 @@
   </div>
 
   <div>
+    <% flag = defined?(is_first_page) ? is_first_page : false %>
     <%= form.label :name_id, "Page Id" %>
-    <%= form.text_field :name_id %>
+    <small>英数字とアンダースコア(_)のみ、1~20文字である必要があります</small>
+    <% if flag %>
+    <small>最初のページであるため "index" に固定されます</small>
+    <% end %>
+    <%= form.text_field :name_id, value: (flag ? "index" : page.name_id), disabled: flag %>
   </div>
 
   <div>

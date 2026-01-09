@@ -3,3 +3,8 @@
 <h1>設定</h1>
 
 <%= link_to "アカウント設定", settings_account_path %>
+
+<br />
+<br />
+
+<%= button_to "サインアウト", signout_path, method: :delete, data: { turbo: false } %>

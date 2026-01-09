@@ -1,10 +1,10 @@
 <% provide(:title, "サインアップ") %>
 
-<h1>Appを開始する</h1>
+<h1>ivemeを開始する</h1>
 
 <p>ようこそ！以下の情報を確認して登録してください。</p>
 
-<%= form_with model: @account, url: signup_path, method: :post, data: { turbo: false } do |f| %>
+<%= form_with model: @account, url: signup_path, method: :post, class: "ctmf", data: { turbo: false } do |f| %>
   <%= render "shared/error_messages", instead: @account %>
 
   <div>
@@ -25,7 +25,7 @@
   <div>
     <br />
     アカウントを作成することで、当サービスの<br />
-    <%= link_to "利用規約", terms_of_service_path %>と<%= link_to "プライバシーポリシー", privacy_policy_path %>に<br />
+    <%= link_to "利用規約", terms_of_service_path, target: "_blank", rel: "noopener nofollow" %>と<%= link_to "プライバシーポリシー", privacy_policy_path, target: "_blank", rel: "noopener nofollow" %>に<br />
     同意したとみなされます。<br />
     <br />
   </div>

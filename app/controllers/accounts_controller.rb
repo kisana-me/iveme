@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-  before_action :set_account, only: %i[show]
+  before_action :set_account, only: %i[ show page ]
 
   def index
     accounts = Account
@@ -11,7 +11,16 @@ class AccountsController < ApplicationController
   end
 
   def show
-    @is_account_owner = @current_account && (@current_account.id == @account.id || admin?)
+    @page = @account.pages.is_normal.find_by!(name_id: "index")
+  end
+
+  def page
+    if params[:page_name_id] == "index"
+      return redirect_to account_path(@account.name_id)
+    end
+
+    @page = @account.pages.is_normal.find_by!(name_id: params[:page_name_id])
+    render :show
   end
 
   private

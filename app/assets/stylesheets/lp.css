@@ -33,6 +33,7 @@
 }
 .animate-on-scroll {
   opacity: 0;
+  transform: translateY(0);
 }
 
 /* Card Layouts */
@@ -71,7 +72,6 @@
 .lp-h2::after {
   content: '✨';
   position: absolute;
-  top: -50%%;
   font-size: 1.5rem;
 }
 

@@ -81,7 +81,7 @@
       </div>
       <div>
         <% if @current_account %>
-          <%= link_to("ページ", account_path(@current_account.name_id)) %>
+          <%= link_to("ホーム", home_path) %>
         <% else %>
           <%= link_to("開始", sessions_start_path) %>
         <% end %>

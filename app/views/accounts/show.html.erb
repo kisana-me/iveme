@@ -1,5 +1,3 @@
-<% provide(:title, "#{@account.name} さん") %>
+<% content_for :title, @page.title %>
 
-<h1>アカウント</h1>
-
-<%= render "account", account: @account %>
+<%= render partial: "pages/page", locals: { page: @page } %>

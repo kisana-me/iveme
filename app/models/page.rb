@@ -14,7 +14,7 @@ class Page < ApplicationRecord
 
   validates :name_id,
     presence: true,
-    length: { in: 5..50, allow_blank: true },
+    length: { in: 1..20, allow_blank: true },
     format: { with: NAME_ID_REGEX, message: :invalid_name_id_format, allow_blank: true },
     uniqueness: { scope: :account_id, case_sensitive: false, allow_blank: true }
   validates :title,

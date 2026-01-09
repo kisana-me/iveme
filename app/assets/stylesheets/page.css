@@ -1,3 +1,45 @@
+/* ページ一覧 */
+
+.pages > a {
+  display: flex;
+  gap: 0.8rem;
+  background: linear-gradient(353deg, #f42c70, #ffb29c);
+  padding: 0.8rem;
+  margin: 0.8rem 0;
+  border-radius: 7px;
+  color: white;
+  text-decoration: none;
+  box-shadow: 0px 0px 15px -5px #ffb29c;
+  transition: box-shadow 0.3s ease-in-out;
+}
+.pages > a > div:first-child {
+  flex-shrink: 0;
+}
+.pages > a img {
+  width: 3rem;
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+  display: inline-block;
+  background-color: #ccc;
+}
+.pages > a:hover {
+  box-shadow: 0px 0px 20px -5px #f42c70;
+}
+.pages > a h2 {
+  font-size: 1.25rem;
+}
+.pages > a * {
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pages > a p:last-child {
+  font-size: 0.8rem;
+}
+
+/* ページ */
+
 .page-owner {
   border: 1px solid #ccc;
   padding: 1rem;
@@ -10,4 +52,7 @@
 .page-icon {
   width: 10rem;
   border-radius: 50%;
+  aspect-ratio: 1/1;
+  display: inline-block;
+  background-color: #ccc;
 }
