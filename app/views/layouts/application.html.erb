@@ -21,7 +21,7 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="<%= full_title(yield(:title)) %>">
     <meta property="og:description" content="<%= content_for?(:description) ? yield(:description) : "自分だけのプロフィールページを簡単に作成・共有できるサービスです。" %>">
-    <meta property="og:image" content="<%= full_url("/static-assets/images/app-1.png") %>">
+    <meta property="og:image" content="<%= full_url("/static_assets/images/iveme-1.png") %>">
     <meta property="og:locale" content="ja_JP">
     <meta property="og:site_name" content="iveme">
 
@@ -30,15 +30,12 @@
     <meta name="twitter:site:id" content="iveme">
     <meta name="twitter:title" content="<%= full_title(yield(:title)) %>">
     <meta name="twitter:description" content="<%= content_for?(:description) ? yield(:description) : "自分だけのプロフィールページを簡単に作成・共有できるサービスです。" %>">
-    <meta name="twitter:image" content="<%= full_url("/static-assets/images/app-1.png") %>">
+    <meta name="twitter:image" content="<%= full_url("/static_assets/images/iveme-1.png") %>">
     <meta name="twitter:image:alt" content="ivemeの画像">
     <meta name="twitter:creator" content="kisana">
     <meta name="twitter:creator:id" content="kisana_me">
 
     <link rel="icon" href="/favicon.ico">
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
 
     <meta http-equiv="content-language" content="<%= content_for?(:lang) ? yield(:lang) : "ja" %>">
     <meta name="viewport" content="width=device-width,initial-scale=1">

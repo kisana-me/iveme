@@ -40,7 +40,7 @@ class Page < ApplicationRecord
   end
 
   def icon_url
-    icon&.image_url || full_url("/static_assets/images/account-icon.webp")
+    icon&.image_url || full_url("/static_assets/images/icon.png")
   end
 
   def background_file=(file)

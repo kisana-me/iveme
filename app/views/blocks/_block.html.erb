@@ -15,7 +15,9 @@
       <% end %>
 
       <% if block.url.present? %>
-        <%= link_to block.url, block.url, target: "_blank", rel: "noopener nofollow" %>
+        <div>
+          <%= link_to block.url, block.url, target: "_blank", rel: "noopener nofollow" %>
+        </div>
       <% end %>
     </div>
 
