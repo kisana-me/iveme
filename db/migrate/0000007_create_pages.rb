@@ -8,13 +8,13 @@ class CreatePages < ActiveRecord::Migration[8.1]
       t.references :background, null: true, foreign_key: { to_table: :images }
       t.string :title, null: false, default: ""
       t.text :description, null: false, default: ""
-      t.string :font_family, null: false, default: ""
-      t.string :font_weight, null: false, default: ""
-      t.string :font_color, null: false, default: ""
-      t.string :block_color, null: false, default: ""
-      t.string :accent_color, null: false, default: ""
-      t.string :background_color, null: false, default: ""
-      t.string :gradient_color, null: false, default: ""
+      t.string :font_family, null: true
+      t.string :font_weight, null: true
+      t.string :font_color, null: true
+      t.string :block_color, null: true
+      t.string :accent_color, null: true
+      t.string :background_color, null: true
+      t.string :gradient_color, null: true
       t.string :page_type, null: false, default: ""
       t.integer :visibility, null: false, limit: 1, default: 0
       t.json :meta, null: false, default: {}

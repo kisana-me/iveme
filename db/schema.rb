@@ -113,18 +113,18 @@ ActiveRecord::Schema[8.1].define(version: 8) do
   end
 
   create_table "pages", charset: "utf8mb4", collation: "utf8mb4_uca1400_ai_ci", force: :cascade do |t|
-    t.string "accent_color", default: "", null: false
+    t.string "accent_color"
     t.bigint "account_id", null: false
     t.string "aid", limit: 14, null: false
-    t.string "background_color", default: "", null: false
+    t.string "background_color"
     t.bigint "background_id"
-    t.string "block_color", default: "", null: false
+    t.string "block_color"
     t.datetime "created_at", null: false
     t.text "description", default: "", null: false
-    t.string "font_color", default: "", null: false
-    t.string "font_family", default: "", null: false
-    t.string "font_weight", default: "", null: false
-    t.string "gradient_color", default: "", null: false
+    t.string "font_color"
+    t.string "font_family"
+    t.string "font_weight"
+    t.string "gradient_color"
     t.bigint "icon_id"
     t.text "meta", size: :long, default: "{}", null: false, collation: "utf8mb4_bin"
     t.string "name_id", null: false

@@ -14,6 +14,8 @@ class Image < ApplicationRecord
   before_create :image_upload
   before_save :file_visibility_check
 
+  validate :validate_subscription_image_limit, on: :create
+
   validates :name,
     allow_blank: true,
     length: { in: 1..50 }
@@ -98,6 +100,29 @@ class Image < ApplicationRecord
   end
 
   private
+
+  def validate_subscription_image_limit
+    return if account.blank?
+
+    limit = subscription_image_limit
+    current_count = account.images.isnt_deleted.where(created_at: (Time.current - 3.days)..).count
+    return if current_count < limit
+
+    errors.add(:base, :image_limit_exceeded, limit: limit)
+  end
+
+  def subscription_image_limit
+    case account.subscription_plan
+    when :plus
+      30
+    when :premium
+      20
+    when :luxury
+      10
+    else
+      5
+    end
+  end
 
   def file_visibility_check
     return unless deleted?

@@ -37,6 +37,7 @@
   justify-content: space-evenly;
   line-height: .8rem;
   font-size: .8rem;
+  gap: 4px;
 }
 .block-actions button {
   width: 100%;
