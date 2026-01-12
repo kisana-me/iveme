@@ -27,7 +27,7 @@ class PagesController < ApplicationController
   def update
     @page = Page.is_normal.find_by!(aid: params[:aid])
     if @page.update(page_params)
-      redirect_to account_page_path(@current_account.name_id, @page.name_id), notice: "ページを更新しました"
+      redirect_to edit_page_path(@page.aid), notice: "ページを更新しました"
     else
       render :edit
     end
