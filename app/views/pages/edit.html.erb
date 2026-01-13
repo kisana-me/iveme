@@ -1,23 +1,72 @@
 <% content_for :title, "ページを編集" %>
 
-<h1>ページを編集</h1>
+<div class="page-theme">
 
-<%= render "form", page: @page, url: page_path(@page.aid) %>
+  <h1>ページを編集</h1>
 
-<%= button_to "ページを削除", page_path(@page.aid), method: :delete, data: { turbo_confirm: "ページを削除しますか？" }, class: "ctmf-button", style: "color: red;" %>
+  <%= render "form", page: @page, url: page_path(@page.aid) %>
 
-<br />
+  <%= button_to "ページを削除", page_path(@page.aid), method: :delete, data: { turbo_confirm: "ページを削除しますか？" }, class: "ctmf-button", style: "color: red;" %>
 
-<%= link_to "ページへ", account_page_path(@current_account.name_id, @page.name_id) %>
+  <br />
 
-<hr style="margin: 2rem 0;" />
+  <%= link_to "ページへ", account_page_path(@current_account.name_id, @page.name_id) %>
 
-<%= turbo_frame_tag "new_block" do %>
-  <%= button_to "ブロック追加", new_block_path(), params: {page_aid: @page.aid}, method: :get, data: { turbo_frame: "new_block" }, class: "ctmf-button" %>
-<% end %>
+  <hr style="margin: 2rem 0;" />
 
-<div id="blocks">
-  <%= turbo_frame_tag "blocks" do %>
-    <%= render partial: "blocks/block", collection: @page.blocks.is_normal.ordered, as: "block", locals: { editable: true } %>
+  <%= turbo_frame_tag "new_block" do %>
+    <%= button_to "ブロック追加", new_block_path(), params: {page_aid: @page.aid}, method: :get, data: { turbo_frame: "new_block" }, class: "ctmf-button" %>
   <% end %>
+
+  <div id="blocks">
+    <%= turbo_frame_tag "blocks" do %>
+      <%= render partial: "blocks/block", collection: @page.blocks.is_normal.ordered, as: "block", locals: { editable: true } %>
+    <% end %>
+  </div>
+
 </div>
+
+<style>
+  main {
+    <% if @page.background.present? %>
+      background-image: url("<%= @page.background_url %>");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    <% elsif @page.background_color.present? && @page.gradient_color.present? %>
+      background-image: linear-gradient(to bottom right, <%= @page.background_color %>, <%= @page.gradient_color %>);
+    <% elsif @page.background_color.present? %>
+      background-color: <%= @page.background_color %>;
+    <% elsif @page.gradient_color.present? %>
+      background-color: <%= @page.gradient_color %>;
+    <% else %>
+      background-image: linear-gradient(to bottom right, #f0f0f0, #d0d0d0);
+    <% end %>
+
+    --page-font-color: <%= @page.font_color.presence || "#000000" %>;
+    --page-block-color: <%= @page.block_color.presence || "#FFFFFF" %>;
+    --page-accent-color: <%= @page.accent_color.presence || "#F42C70" %>;
+  }
+
+  .page-theme {
+    color: var(--page-font-color);
+  }
+
+  .page-theme a {
+    color: var(--page-accent-color);
+  }
+
+  .page-theme .block {
+    background-color: var(--page-block-color);
+  }
+  .page-theme .block:hover {
+    background-color: var(--page-block-color);
+  }
+
+  .page-theme .ctmf input[type="submit"],
+  .page-theme .ctmf-button {
+    border: 2px solid var(--page-accent-color);
+    background: transparent;
+    color: var(--page-accent-color);
+  }
+</style>

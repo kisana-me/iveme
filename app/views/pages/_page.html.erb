@@ -1,28 +1,74 @@
+<div class="page-theme">
+
+  <% if page.account == @current_account %>
+    <div class="page-owner">
+      <p>あなたはこのページの所有者です。</p>
+      <%= link_to "編集", edit_page_path(page.aid) %>
+    </div>
+  <% end %>
+
+  <%= image_tag(page.icon_url, alt: "#{page.title}のアイコン", class: "page-icon") %>
+
+  <h1><%= page.title %></h1>
+
+  <div>
+    <%= md_render page.description %>
+  </div>
+
+  <div id="blocks">
+    <%= turbo_frame_tag "blocks" do %>
+      <%= render partial: "blocks/block", collection: page.blocks.is_normal.ordered, as: "block" %>
+    <% end %>
+  </div>
+
+</div>
+
 <style>
   main {
-    background-image: url("<%= page.background_url %>");
-    background-size: cover;
-    background-position: center;
+    <% if page.background.present? %>
+      background-image: url("<%= page.background_url %>");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    <% elsif page.background_color.present? && page.gradient_color.present? %>
+      background-image: linear-gradient(to bottom right, <%= page.background_color %>, <%= page.gradient_color %>);
+    <% elsif page.background_color.present? %>
+      background-color: <%= page.background_color %>;
+    <% elsif page.gradient_color.present? %>
+      background-color: <%= page.gradient_color %>;
+    <% else %>
+      background-image: linear-gradient(to bottom right, #f0f0f0, #d0d0d0);
+    <% end %>
+
+    --page-font-color: <%= page.font_color.presence || "#000000" %>;
+    --page-block-color: <%= page.block_color.presence || "#FFFFFF" %>;
+    --page-accent-color: <%= page.accent_color.presence || "#F42C70" %>;
+  }
+
+  .page-theme {
+    color: var(--page-font-color);
+  }
+
+  .page-theme a {
+    color: var(--page-accent-color);
+  }
+
+  .page-theme .block {
+    background-color: var(--page-block-color);
+    border-color: var(--page-accent-color);
+  }
+  .page-theme .block:hover {
+    background-color: var(--page-block-color);
+  }
+
+  .page-theme .ctmf input[type="submit"],
+  .page-theme .ctmf-button {
+    border: 2px solid var(--page-accent-color);
+    background: transparent;
+    color: var(--page-accent-color);
+  }
+
+  .page-theme hr {
+    border-color: var(--page-accent-color);
   }
 </style>
-
-<% if page.account == @current_account %>
-  <div class="page-owner">
-    <p>あなたはこのページの所有者です。</p>
-    <%= link_to "編集", edit_page_path(page.aid) %>
-  </div>
-<% end %>
-
-<%= image_tag(page.icon_url, alt: "#{page.title}のアイコン", class: "page-icon") %>
-
-<h1><%= page.title %></h1>
-
-<div>
-  <%= md_render page.description %>
-</div>
-
-<div id="blocks">
-  <%= turbo_frame_tag "blocks" do %>
-    <%= render partial: "blocks/block", collection: page.blocks.is_normal.ordered, as: "block" %>
-  <% end %>
-</div>

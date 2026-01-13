@@ -31,6 +31,73 @@
     <%= form.textarea :description %>
   </div>
 
+  <hr style="margin: 2rem 0;" />
+
+  <div>
+    <%= form.label :font_color, "文字色" %>
+    <small>未設定ならデフォルト</small>
+    <div data-controller="color-picker" data-color-picker-default-color-value="#000000">
+      <%= form.hidden_field :font_color, data: { "color-picker-target": "hidden" } %>
+      <input type="color" value="<%= page.font_color.presence || '#000000' %>" data-color-picker-target="picker" data-action="input->color-picker#pick" />
+      <label style="margin-left: .5rem;">
+        <input type="checkbox" data-color-picker-target="defaultToggle" data-action="color-picker#toggleDefault" <%= page.font_color.blank? ? 'checked' : '' %> />
+        デフォルト
+      </label>
+    </div>
+  </div>
+
+  <div>
+    <%= form.label :block_color, "ブロック色" %>
+    <small>未設定ならデフォルト</small>
+    <div data-controller="color-picker" data-color-picker-default-color-value="#FFFFFF">
+      <%= form.hidden_field :block_color, data: { "color-picker-target": "hidden" } %>
+      <input type="color" value="<%= page.block_color.presence || '#FFFFFF' %>" data-color-picker-target="picker" data-action="input->color-picker#pick" />
+      <label style="margin-left: .5rem;">
+        <input type="checkbox" data-color-picker-target="defaultToggle" data-action="color-picker#toggleDefault" <%= page.block_color.blank? ? 'checked' : '' %> />
+        デフォルト
+      </label>
+    </div>
+  </div>
+
+  <div>
+    <%= form.label :accent_color, "アクセント色" %>
+    <small>未設定ならデフォルト</small>
+    <div data-controller="color-picker" data-color-picker-default-color-value="#F42C70">
+      <%= form.hidden_field :accent_color, data: { "color-picker-target": "hidden" } %>
+      <input type="color" value="<%= page.accent_color.presence || '#F42C70' %>" data-color-picker-target="picker" data-action="input->color-picker#pick" />
+      <label style="margin-left: .5rem;">
+        <input type="checkbox" data-color-picker-target="defaultToggle" data-action="color-picker#toggleDefault" <%= page.accent_color.blank? ? 'checked' : '' %> />
+        デフォルト
+      </label>
+    </div>
+  </div>
+
+  <div>
+    <%= form.label :background_color, "背景色" %>
+    <small>未設定ならデフォルト</small>
+    <div data-controller="color-picker" data-color-picker-default-color-value="#F0F0F0">
+      <%= form.hidden_field :background_color, data: { "color-picker-target": "hidden" } %>
+      <input type="color" value="<%= page.background_color.presence || '#F0F0F0' %>" data-color-picker-target="picker" data-action="input->color-picker#pick" />
+      <label style="margin-left: .5rem;">
+        <input type="checkbox" data-color-picker-target="defaultToggle" data-action="color-picker#toggleDefault" <%= page.background_color.blank? ? 'checked' : '' %> />
+        デフォルト
+      </label>
+    </div>
+  </div>
+
+  <div>
+    <%= form.label :gradient_color, "グラデーション色(2色目)" %>
+    <small>背景色と両方ある場合はグラデーションになります。未設定ならデフォルト</small>
+    <div data-controller="color-picker" data-color-picker-default-color-value="#D0D0D0">
+      <%= form.hidden_field :gradient_color, data: { "color-picker-target": "hidden" } %>
+      <input type="color" value="<%= page.gradient_color.presence || '#D0D0D0' %>" data-color-picker-target="picker" data-action="input->color-picker#pick" />
+      <label style="margin-left: .5rem;">
+        <input type="checkbox" data-color-picker-target="defaultToggle" data-action="color-picker#toggleDefault" <%= page.gradient_color.blank? ? 'checked' : '' %> />
+        デフォルト
+      </label>
+    </div>
+  </div>
+
   <div>
     <%= form.submit "送信" %>
   </div>
