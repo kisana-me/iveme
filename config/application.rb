@@ -13,7 +13,7 @@ module App
     config.middleware.delete Rack::Runtime
     config.action_view.field_error_proc = proc { |html_tag, _instance| html_tag }
     config.session_store :cookie_store,
-                         key: "_app",
+                         key: "_iveme",
                          domain: :all,
                          tld_length: 2,
                          same_site: :lax,
