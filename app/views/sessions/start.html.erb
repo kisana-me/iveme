@@ -1,4 +1,9 @@
 <% provide(:title, 'サインイン/サインアップ') %>
 
 <h1>サインイン/サインアップ</h1>
+
+<p>ANYURアカウントを使用してのみ、ivemeを利用することが出来ます。</p>
+<p>ANYURアカウントは無料で作成・利用が出来ます。</p>
+<p>下記のボタンをクリックして、ANYURでサインイン・サインアップの後、認証してください。</p>
+
 <%= button_to "ANYURで続行", oauth_start_path, method: :post, data: { turbo: false } %>
