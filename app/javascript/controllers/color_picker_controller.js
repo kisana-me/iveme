@@ -11,6 +11,27 @@ export default class extends Controller {
   connect() {
     this.syncFromHidden()
     this.applyPreview()
+
+    this.form = this.element.closest("form")
+    if (this.form) {
+      this._onFormChange = (event) => {
+        const target = event.target
+        if (!(target instanceof HTMLInputElement)) return
+        if (target.type !== "checkbox") return
+
+        if (target.name && target.name.endsWith("[remove_background]")) {
+          this.applyPreview()
+        }
+      }
+
+      this.form.addEventListener("change", this._onFormChange)
+    }
+  }
+
+  disconnect() {
+    if (this.form && this._onFormChange) {
+      this.form.removeEventListener("change", this._onFormChange)
+    }
   }
 
   pick() {
@@ -77,6 +98,25 @@ export default class extends Controller {
     const form = this.element.closest("form")
     if (!form) return
 
+    const hasBackgroundImage = (form.dataset.pageHasBackgroundImage || "").toLowerCase() === "true"
+    const removeBackgroundToggle = form.querySelector('input[type="checkbox"][name$="[remove_background]"]')
+    const removeBackground = !!(removeBackgroundToggle && removeBackgroundToggle.checked)
+
+    const backgroundFileInput = form.querySelector('input[type="file"][name$="[background_file]"]')
+    const hasNewBackgroundFile = !!(backgroundFileInput && backgroundFileInput.files && backgroundFileInput.files.length > 0)
+
+    if (hasNewBackgroundFile && !removeBackground) {
+      // Background is currently previewed via selected file (blob URL).
+      // Don't clear/override it just because colors changed.
+      return
+    }
+
+    if (hasBackgroundImage && !removeBackground) {
+      element.style.backgroundImage = ""
+      element.style.backgroundColor = ""
+      return
+    }
+
     const bgHidden = form.querySelector('input[type="hidden"][name$="[background_color]"]')
     const gradHidden = form.querySelector('input[type="hidden"][name$="[gradient_color]"]')
 
@@ -98,10 +138,10 @@ export default class extends Controller {
       element.style.backgroundColor = ""
       element.style.backgroundImage = `linear-gradient(to bottom right, ${bgValue}, ${gradValue})`
     } else if (bgValue.length > 0) {
-      element.style.backgroundImage = ""
+      element.style.backgroundImage = "none"
       element.style.backgroundColor = bgValue
     } else if (gradValue.length > 0) {
-      element.style.backgroundImage = ""
+      element.style.backgroundImage = "none"
       element.style.backgroundColor = gradValue
     } else {
       element.style.backgroundColor = ""

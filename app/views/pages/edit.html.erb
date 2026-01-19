@@ -4,6 +4,8 @@
 
   <h1>ページを編集</h1>
 
+  <p style="color: red;">内容を更新したら「送信」ボタンを押して確定させてください。</p>
+
   <%= render "form", page: @page, url: page_path(@page.aid) %>
 
   <%= button_to "ページを削除", page_path(@page.aid), method: :delete, data: { turbo_confirm: "ページを削除しますか？" }, class: "ctmf-button", style: "color: red;" %>

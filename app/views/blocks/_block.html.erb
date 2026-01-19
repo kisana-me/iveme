@@ -24,8 +24,8 @@
     <% if defined? editable %>
       <div class="block-actions">
         <div>
-          <%= button_to "Edit", edit_block_path(block.aid), method: :get, class: "block-action" %>
-          <%= button_to "Delete", block_path(block.aid), method: :delete, data: { turbo_confirm: "ブロックを削除しますか？" }, class: "block-action", style: "color: red;" %>
+          <%= button_to "編集", edit_block_path(block.aid), method: :get, class: "block-action" %>
+          <%= button_to "削除", block_path(block.aid), method: :delete, data: { turbo_confirm: "ブロックを削除しますか？" }, class: "block-action", style: "color: red;" %>
         </div>
         <div>
           <%= button_to "▲", up_block_path(block.aid), method: :patch, class: "block-action" %>

@@ -26,7 +26,20 @@ class PagesController < ApplicationController
 
   def update
     @page = Page.is_normal.find_by!(aid: params[:aid])
-    if @page.update(page_params)
+
+    pp = page_params
+    remove_icon = pp[:remove_icon].to_s == "1"
+    remove_background = pp[:remove_background].to_s == "1"
+
+    if remove_icon && pp[:icon_file].blank? && pp[:icon_aid].blank?
+      @page.icon = nil
+    end
+
+    if remove_background && pp[:background_file].blank? && pp[:background_aid].blank?
+      @page.background = nil
+    end
+
+    if @page.update(pp.except(:remove_icon, :remove_background))
       redirect_to edit_page_path(@page.aid), notice: "ページを更新しました"
     else
       render :edit
@@ -88,8 +101,10 @@ class PagesController < ApplicationController
         :page_type,
         :icon_aid,
         :icon_file,
+        :remove_icon,
         :background_aid,
-        :background_file
+        :background_file,
+        :remove_background
       ]
     )
   end

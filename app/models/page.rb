@@ -9,7 +9,7 @@ class Page < ApplicationRecord
   attribute :meta, :json, default: -> { {} }
   enum :visibility, { opened: 0, limited: 1, closed: 2 }
   enum :status, { normal: 0, locked: 1, deleted: 2, specific: 3 }
-  attr_accessor :icon_aid, :background_aid
+  attr_accessor :icon_aid, :background_aid, :remove_icon, :remove_background
 
   before_validation :normalize_theme_colors
   before_validation :assign_images
