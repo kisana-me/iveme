@@ -36,7 +36,7 @@
   <div>
     <%= form.label :font_color, "文字色" %>
     <small>未設定ならデフォルト</small>
-    <div data-controller="color-picker" data-color-picker-default-color-value="#000000">
+    <div data-controller="color-picker" data-color-picker-default-color-value="#000000" data-color-picker-css-var-value="--page-font-color">
       <%= form.hidden_field :font_color, data: { "color-picker-target": "hidden" } %>
       <input type="color" value="<%= page.font_color.presence || '#000000' %>" data-color-picker-target="picker" data-action="input->color-picker#pick" />
       <label style="margin-left: .5rem;">
@@ -49,7 +49,7 @@
   <div>
     <%= form.label :block_color, "ブロック色" %>
     <small>未設定ならデフォルト</small>
-    <div data-controller="color-picker" data-color-picker-default-color-value="#FFFFFF">
+    <div data-controller="color-picker" data-color-picker-default-color-value="#FFFFFF" data-color-picker-css-var-value="--page-block-color">
       <%= form.hidden_field :block_color, data: { "color-picker-target": "hidden" } %>
       <input type="color" value="<%= page.block_color.presence || '#FFFFFF' %>" data-color-picker-target="picker" data-action="input->color-picker#pick" />
       <label style="margin-left: .5rem;">
@@ -62,7 +62,7 @@
   <div>
     <%= form.label :accent_color, "アクセント色" %>
     <small>未設定ならデフォルト</small>
-    <div data-controller="color-picker" data-color-picker-default-color-value="#F42C70">
+    <div data-controller="color-picker" data-color-picker-default-color-value="#F42C70" data-color-picker-css-var-value="--page-accent-color">
       <%= form.hidden_field :accent_color, data: { "color-picker-target": "hidden" } %>
       <input type="color" value="<%= page.accent_color.presence || '#F42C70' %>" data-color-picker-target="picker" data-action="input->color-picker#pick" />
       <label style="margin-left: .5rem;">
@@ -75,7 +75,7 @@
   <div>
     <%= form.label :background_color, "背景色" %>
     <small>未設定ならデフォルト</small>
-    <div data-controller="color-picker" data-color-picker-default-color-value="#F0F0F0">
+    <div data-controller="color-picker" data-color-picker-default-color-value="#F0F0F0" data-color-picker-css-var-value="--page-background-color">
       <%= form.hidden_field :background_color, data: { "color-picker-target": "hidden" } %>
       <input type="color" value="<%= page.background_color.presence || '#F0F0F0' %>" data-color-picker-target="picker" data-action="input->color-picker#pick" />
       <label style="margin-left: .5rem;">
@@ -88,7 +88,7 @@
   <div>
     <%= form.label :gradient_color, "グラデーション色(2色目)" %>
     <small>背景色と両方ある場合はグラデーションになります。未設定ならデフォルト</small>
-    <div data-controller="color-picker" data-color-picker-default-color-value="#D0D0D0">
+    <div data-controller="color-picker" data-color-picker-default-color-value="#D0D0D0" data-color-picker-css-var-value="--page-gradient-color">
       <%= form.hidden_field :gradient_color, data: { "color-picker-target": "hidden" } %>
       <input type="color" value="<%= page.gradient_color.presence || '#D0D0D0' %>" data-color-picker-target="picker" data-action="input->color-picker#pick" />
       <label style="margin-left: .5rem;">
@@ -102,3 +102,10 @@
     <%= form.submit "送信" %>
   </div>
 <% end %>
+
+<style>
+  .ctmf input[type="text"], .ctmf textarea {
+    color: inherit;
+    background: inherit;
+  }
+</style>
