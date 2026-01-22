@@ -14,6 +14,8 @@ export default class extends Controller {
   static values = {
     defaultIconUrl: String,
     applyToSelector: { type: String, default: "main" },
+    hasIcon: Boolean,
+    hasBackground: Boolean,
   }
 
   connect() {
@@ -118,8 +120,9 @@ export default class extends Controller {
   }
 
   syncRemoveRows(options = {}) {
-    const showIcon = options.showIcon === true || (!!this.iconInputTarget?.files?.length)
-    const showBackground = options.showBackground === true || (!!this.backgroundInputTarget?.files?.length)
+    const showIcon = options.showIcon === true || this.hasHasIconValue || (!!this.iconInputTarget?.files?.length)
+    const showBackground =
+      options.showBackground === true || this.hasHasBackgroundValue || (!!this.backgroundInputTarget?.files?.length)
 
     if (this.hasRemoveIconRowTarget) {
       this.removeIconRowTarget.style.display = showIcon ? "block" : "none"

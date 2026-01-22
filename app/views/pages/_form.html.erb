@@ -6,7 +6,9 @@
     turbo: false,
     controller: "image-preview",
     "image-preview-default-icon-url-value": full_url("/static_assets/images/icon.png"),
-    page_has_background_image: page.background.present?
+    "image-preview-has-icon-value": page.icon_id.present?,
+    "image-preview-has-background-value": page.background_id.present?,
+    page_has_background_image: page.background_id.present?
   }
 ) do |form| %>
   <%= render "shared/error_messages", instead: page %>
@@ -16,7 +18,7 @@
   <div>
     <%= form.label :icon_file, "ページアイコン画像" %>
     <%= form.file_field :icon_file, data: { "image-preview-target": "iconInput", action: "change->image-preview#iconChanged" } %>
-    <label data-image-preview-target="removeIconRow" style="display: <%= page.icon.present? ? 'block' : 'none' %>; margin-top: .5rem;">
+    <label data-image-preview-target="removeIconRow" style="display: <%= page.icon_id.present? ? 'block' : 'none' %>; margin-top: .5rem;">
       <%= form.check_box :remove_icon, data: { "image-preview-target": "removeIconToggle", action: "change->image-preview#removeIconToggled" } %>
       アイコン画像を削除
     </label>
@@ -25,7 +27,7 @@
   <div>
     <%= form.label :background_file, "ページ背景画像" %>
     <%= form.file_field :background_file, data: { "image-preview-target": "backgroundInput", action: "change->image-preview#backgroundChanged" } %>
-    <label data-image-preview-target="removeBackgroundRow" style="display: <%= page.background.present? ? 'block' : 'none' %>; margin-top: .5rem;">
+    <label data-image-preview-target="removeBackgroundRow" style="display: <%= page.background_id.present? ? 'block' : 'none' %>; margin-top: .5rem;">
       <%= form.check_box :remove_background, data: { "image-preview-target": "removeBackgroundToggle", action: "change->image-preview#removeBackgroundToggled" } %>
       背景画像を削除
     </label>
