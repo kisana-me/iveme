@@ -62,6 +62,40 @@ class Account < ApplicationRecord
     plan&.to_sym || :unknown
   end
 
+  # === Subscription Limits === #
+
+  PAGE_LIMITS = {
+    plus: 3,
+    premium: 6,
+    luxury: 9
+  }.freeze
+
+  def page_limit
+    PAGE_LIMITS.fetch(subscription_plan, 1)
+  end
+
+  def page_limit_exceeded?
+    pages.isnt_deleted.count >= page_limit
+  end
+
+  IMAGE_LIMITS = {
+    plus: 10,
+    premium: 20,
+    luxury: 30
+  }.freeze
+
+  def image_limit
+    IMAGE_LIMITS.fetch(subscription_plan, 5)
+  end
+
+  def recent_image_count(since: 3.days.ago)
+    images.isnt_deleted.where(created_at: since..).count
+  end
+
+  def image_limit_exceeded?(since: 3.days.ago)
+    recent_image_count(since: since) >= image_limit
+  end
+
   def admin?
     meta["roles"]&.include?("admin")
   end

@@ -98,25 +98,9 @@ class Page < ApplicationRecord
 
   def validate_subscription_page_limit
     return if account.blank?
+    return unless account.page_limit_exceeded?
 
-    limit = subscription_page_limit
-    current_count = account.pages.isnt_deleted.count
-    return if current_count < limit
-
-    errors.add(:base, :page_limit_exceeded, limit: limit)
-  end
-
-  def subscription_page_limit
-    case account.subscription_plan
-    when :plus
-      2
-    when :premium
-      5
-    when :luxury
-      8
-    else
-      1
-    end
+    errors.add(:base, :page_limit_exceeded, limit: account.page_limit)
   end
 
   def assign_images

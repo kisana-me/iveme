@@ -3,6 +3,13 @@ class PagesController < ApplicationController
 
   def new
     @page = Page.new
+    @page.account = @current_account
+    if @current_account.page_limit_exceeded?
+      return redirect_to home_path, alert: I18n.t(
+        "activerecord.errors.messages.page_limit_exceeded",
+        limit: @current_account.page_limit
+      )
+    end
     @is_first_page = @current_account.pages.is_normal.count.zero?
   end
 

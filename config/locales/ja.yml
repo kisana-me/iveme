@@ -140,6 +140,7 @@ ja:
         image_invalid_format: "は未対応の形式です(png, jpeg, gif, webpのみ対応)"
         image_too_large: "の容量が大きすぎます(最大 %{max_size_mb} MB)"
         image_dimensions_exceeded: "の解像度が大きすぎます(最大 %{max_width}px × %{max_height}px)"
+        page_limit_exceeded: "ページ作成数が上限に達しました(%{limit}個)。プランをアップグレードすると増えます。"
   general:
     subscription:
       status:
