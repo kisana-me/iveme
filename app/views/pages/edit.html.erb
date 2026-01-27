@@ -58,10 +58,7 @@
     color: var(--page-accent-color);
   }
 
-  .page-theme .block {
-    background-color: var(--page-block-color);
-  }
-  .page-theme .block:hover {
+  .page-theme .block, .page-theme .block-form {
     background-color: var(--page-block-color);
   }
 
@@ -70,5 +67,11 @@
     border: 2px solid var(--page-accent-color);
     background: transparent;
     color: var(--page-accent-color);
+  }
+
+  .page-theme .ctmf input[type="text"], .page-theme .ctmf textarea,
+  .block-form input[type="text"], .block-form textarea {
+    color: inherit;
+    background: inherit;
   }
 </style>

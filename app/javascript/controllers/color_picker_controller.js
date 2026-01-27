@@ -13,7 +13,11 @@ export default class extends Controller {
     this.applyPreview()
 
     this.form = this.element.closest("form")
-    if (this.form) {
+    const watchesRemoveBackground =
+      this.hasCssVarValue &&
+      (this.cssVarValue === "--page-background-color" || this.cssVarValue === "--page-gradient-color")
+
+    if (this.form && watchesRemoveBackground) {
       this._onFormChange = (event) => {
         const target = event.target
         if (!(target instanceof HTMLInputElement)) return

@@ -120,9 +120,9 @@ export default class extends Controller {
   }
 
   syncRemoveRows(options = {}) {
-    const showIcon = options.showIcon === true || this.hasHasIconValue || (!!this.iconInputTarget?.files?.length)
+    const showIcon = options.showIcon === true || this.hasIconValue || !!this.iconInputTarget?.files?.length
     const showBackground =
-      options.showBackground === true || this.hasHasBackgroundValue || (!!this.backgroundInputTarget?.files?.length)
+      options.showBackground === true || this.hasBackgroundValue || !!this.backgroundInputTarget?.files?.length
 
     if (this.hasRemoveIconRowTarget) {
       this.removeIconRowTarget.style.display = showIcon ? "block" : "none"
