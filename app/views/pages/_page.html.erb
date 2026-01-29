@@ -25,6 +25,14 @@
 
 <style>
   main {
+    --page-font-color: <%= page.font_color.presence || "#000000" %>;
+    --page-block-color: <%= page.block_color.presence || "#FFFFFF" %>;
+    --page-accent-color: <%= page.accent_color.presence || "#F42C70" %>;
+    position: relative;
+    overflow: hidden;
+  }
+
+  main::before {
     <% if page.background.present? %>
       background-image: linear-gradient( rgba(0, 0, 0, 0.5),
                         rgba(0, 0, 0, 0.5)
@@ -42,9 +50,12 @@
       background-image: linear-gradient(to bottom right, #f0f0f0, #d0d0d0);
     <% end %>
 
-    --page-font-color: <%= page.font_color.presence || "#000000" %>;
-    --page-block-color: <%= page.block_color.presence || "#FFFFFF" %>;
-    --page-accent-color: <%= page.accent_color.presence || "#F42C70" %>;
+    content: "";
+    position: absolute;
+    inset: 0px;
+    filter: blur(6px) brightness(0.85);
+    /* transform: scale(1.05); */
+    z-index: -1;
   }
 
   .page-theme {
