@@ -116,9 +116,24 @@ export default class extends Controller {
     }
 
     if (hasBackgroundImage && !removeBackground) {
-      element.style.backgroundImage = ""
-      element.style.backgroundColor = ""
+      // Restore the original (server-rendered) background image/overlay.
+      element.style.removeProperty("--page-bg-image")
+      element.style.removeProperty("--page-bg-overlay")
+      element.style.removeProperty("--page-bg-size")
+      element.style.removeProperty("--page-bg-position")
+      element.style.removeProperty("--page-bg-attachment")
+      element.style.removeProperty("--page-bg-gradient")
+      element.style.removeProperty("--page-bg-color")
       return
+    }
+
+    if (removeBackground) {
+      // Force-hide any existing background image while remove_background is checked.
+      element.style.setProperty("--page-bg-image", "none")
+      element.style.setProperty("--page-bg-overlay", "none")
+      element.style.setProperty("--page-bg-size", "auto")
+      element.style.setProperty("--page-bg-position", "0% 0%")
+      element.style.setProperty("--page-bg-attachment", "scroll")
     }
 
     const bgHidden = form.querySelector('input[type="hidden"][name$="[background_color]"]')
@@ -139,17 +154,17 @@ export default class extends Controller {
     element.style.setProperty("--page-gradient-color", effectiveGrad)
 
     if (bgValue.length > 0 && gradValue.length > 0) {
-      element.style.backgroundColor = ""
-      element.style.backgroundImage = `linear-gradient(to bottom right, ${bgValue}, ${gradValue})`
+      element.style.setProperty("--page-bg-color", "transparent")
+      element.style.setProperty("--page-bg-gradient", `linear-gradient(to bottom right, ${bgValue}, ${gradValue})`)
     } else if (bgValue.length > 0) {
-      element.style.backgroundImage = "none"
-      element.style.backgroundColor = bgValue
+      element.style.setProperty("--page-bg-gradient", "none")
+      element.style.setProperty("--page-bg-color", bgValue)
     } else if (gradValue.length > 0) {
-      element.style.backgroundImage = "none"
-      element.style.backgroundColor = gradValue
+      element.style.setProperty("--page-bg-gradient", "none")
+      element.style.setProperty("--page-bg-color", gradValue)
     } else {
-      element.style.backgroundColor = ""
-      element.style.backgroundImage = `linear-gradient(to bottom right, ${effectiveBg}, ${effectiveGrad})`
+      element.style.setProperty("--page-bg-color", "transparent")
+      element.style.setProperty("--page-bg-gradient", `linear-gradient(to bottom right, ${effectiveBg}, ${effectiveGrad})`)
     }
   }
 }

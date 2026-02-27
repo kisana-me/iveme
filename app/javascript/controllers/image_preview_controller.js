@@ -93,11 +93,14 @@ export default class extends Controller {
     const element = document.querySelector(this.applyToSelectorValue)
     if (!element) return
 
-    element.style.backgroundImage = `url("${this.backgroundObjectUrl}")`
-    element.style.backgroundSize = "cover"
-    element.style.backgroundPosition = "center"
-    element.style.backgroundAttachment = "fixed"
-    element.style.backgroundColor = ""
+    element.style.setProperty("--page-bg-image", `url("${this.backgroundObjectUrl}")`)
+    element.style.setProperty(
+      "--page-bg-overlay",
+      "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))"
+    )
+    element.style.setProperty("--page-bg-size", "cover")
+    element.style.setProperty("--page-bg-position", "center")
+    element.style.setProperty("--page-bg-attachment", "fixed")
 
     this.syncRemoveRows({ showBackground: true })
   }
@@ -111,6 +114,10 @@ export default class extends Controller {
       }
 
       this.revokeBackgroundObjectUrl()
+      this.forceHideBackgroundImagePreview()
+    }
+
+    if (!isRemoving) {
       this.clearInlineBackgroundPreview()
     }
 
@@ -151,11 +158,22 @@ export default class extends Controller {
     const element = document.querySelector(this.applyToSelectorValue)
     if (!element) return
 
-    element.style.backgroundImage = ""
-    element.style.backgroundSize = ""
-    element.style.backgroundPosition = ""
-    element.style.backgroundAttachment = ""
-    element.style.backgroundColor = ""
+    element.style.removeProperty("--page-bg-image")
+    element.style.removeProperty("--page-bg-overlay")
+    element.style.removeProperty("--page-bg-size")
+    element.style.removeProperty("--page-bg-position")
+    element.style.removeProperty("--page-bg-attachment")
+  }
+
+  forceHideBackgroundImagePreview() {
+    const element = document.querySelector(this.applyToSelectorValue)
+    if (!element) return
+
+    element.style.setProperty("--page-bg-image", "none")
+    element.style.setProperty("--page-bg-overlay", "none")
+    element.style.setProperty("--page-bg-size", "auto")
+    element.style.setProperty("--page-bg-position", "0% 0%")
+    element.style.setProperty("--page-bg-attachment", "scroll")
   }
 
   revokeIconObjectUrl() {

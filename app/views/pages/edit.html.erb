@@ -33,32 +33,46 @@
     --page-font-color: <%= @page.font_color.presence || "#000000" %>;
     --page-block-color: <%= @page.block_color.presence || "#FFFFFF" %>;
     --page-accent-color: <%= @page.accent_color.presence || "#F42C70" %>;
+    --page-bg-image: none;
+    --page-bg-overlay: none;
+    --page-bg-gradient: none;
+    --page-bg-color: transparent;
+    --page-bg-size: auto;
+    --page-bg-position: 0% 0%;
+    --page-bg-attachment: scroll;
+    --page-background-color: <%= @page.background_color.presence || "#F0F0F0" %>;
+    --page-gradient-color: <%= @page.gradient_color.presence || "#D0D0D0" %>;
     position: relative;
     overflow: hidden;
+
+    <% if @page.background.present? %>
+      --page-bg-image: url("<%= @page.background_url %>");
+      --page-bg-overlay: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+      --page-bg-size: cover;
+      --page-bg-position: center;
+      --page-bg-attachment: fixed;
+    <% elsif @page.background_color.present? && @page.gradient_color.present? %>
+      --page-bg-gradient: linear-gradient(to bottom right, <%= @page.background_color %>, <%= @page.gradient_color %>);
+    <% elsif @page.background_color.present? %>
+      --page-bg-color: <%= @page.background_color %>;
+    <% elsif @page.gradient_color.present? %>
+      --page-bg-color: <%= @page.gradient_color %>;
+    <% else %>
+      --page-bg-gradient: linear-gradient(to bottom right, #f0f0f0, #d0d0d0);
+    <% end %>
   }
 
   main::before {
-    <% if @page.background.present? %>
-      background-image: linear-gradient( rgba(0, 0, 0, 0.5),
-                        rgba(0, 0, 0, 0.5)
-                        ), url("<%= @page.background_url %>");
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-    <% elsif @page.background_color.present? && @page.gradient_color.present? %>
-      background-image: linear-gradient(to bottom right, <%= @page.background_color %>, <%= @page.gradient_color %>);
-    <% elsif @page.background_color.present? %>
-      background-color: <%= @page.background_color %>;
-    <% elsif @page.gradient_color.present? %>
-      background-color: <%= @page.gradient_color %>;
-    <% else %>
-      background-image: linear-gradient(to bottom right, #f0f0f0, #d0d0d0);
-    <% end %>
+    background-image: var(--page-bg-overlay), var(--page-bg-image), var(--page-bg-gradient);
+    background-size: var(--page-bg-size);
+    background-position: var(--page-bg-position);
+    background-attachment: var(--page-bg-attachment);
+    background-color: var(--page-bg-color);
 
     content: "";
     position: absolute;
     inset: 0px;
-    filter: blur(6px) brightness(0.85);
+    /* filter: blur(6px) brightness(0.85); */
     /* transform: scale(1.05); */
     z-index: -1;
   }
