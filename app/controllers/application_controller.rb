@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   include ErrorManagement
   include SessionManagement
   include Pagination
+  include TurnstileManagement
 
   before_action :current_account
 
