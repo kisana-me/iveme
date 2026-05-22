@@ -1,6 +1,7 @@
 class Page < ApplicationRecord
   belongs_to :account
   has_many :blocks, dependent: :destroy
+  has_many :questions, dependent: :destroy
   belongs_to :icon, class_name: "Image", optional: true
   belongs_to :background, class_name: "Image", optional: true
 

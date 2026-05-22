@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 8) do
+ActiveRecord::Schema[8.1].define(version: 9) do
   create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_uca1400_ai_ci", force: :cascade do |t|
     t.string "aid", limit: 14, null: false
     t.bigint "banner_id"
@@ -141,6 +141,24 @@ ActiveRecord::Schema[8.1].define(version: 8) do
     t.check_constraint "json_valid(`meta`)", name: "meta"
   end
 
+  create_table "questions", charset: "utf8mb4", collation: "utf8mb4_uca1400_ai_ci", force: :cascade do |t|
+    t.bigint "account_id"
+    t.string "aid", limit: 14, null: false
+    t.text "answer", default: "", null: false
+    t.text "content", default: "", null: false
+    t.datetime "created_at", null: false
+    t.text "meta", size: :long, default: "{}", null: false, collation: "utf8mb4_bin"
+    t.bigint "page_id", null: false
+    t.boolean "read", default: false, null: false
+    t.integer "status", limit: 1, default: 0, null: false
+    t.datetime "updated_at", null: false
+    t.integer "visibility", limit: 1, default: 0, null: false
+    t.index ["account_id"], name: "index_questions_on_account_id"
+    t.index ["aid"], name: "index_questions_on_aid", unique: true
+    t.index ["page_id"], name: "index_questions_on_page_id"
+    t.check_constraint "json_valid(`meta`)", name: "meta"
+  end
+
   create_table "sessions", charset: "utf8mb4", collation: "utf8mb4_uca1400_ai_ci", force: :cascade do |t|
     t.bigint "account_id", null: false
     t.string "aid", limit: 14, null: false
@@ -168,5 +186,7 @@ ActiveRecord::Schema[8.1].define(version: 8) do
   add_foreign_key "pages", "accounts"
   add_foreign_key "pages", "images", column: "background_id"
   add_foreign_key "pages", "images", column: "icon_id"
+  add_foreign_key "questions", "accounts"
+  add_foreign_key "questions", "pages"
   add_foreign_key "sessions", "accounts"
 end

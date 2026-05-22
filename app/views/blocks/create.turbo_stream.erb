@@ -4,4 +4,4 @@
   <%= button_to "ブロック追加", new_block_path(), params: {page_aid: @page.aid}, method: :get, data: { turbo_frame: "new_block" }, class: "ctmf-button" %>
 <% end %>
 
- <%= turbo_stream.update "flash", partial: "shared/flash" %>
+<%= turbo_stream.update "flash", partial: "shared/flash" %>

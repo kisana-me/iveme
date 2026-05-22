@@ -1,0 +1,6 @@
+<%= turbo_stream.update "question_form" do %>
+  <div>質問をしました!</div>
+  <div>質問の内容: <%= @question.content %></div>
+<% end %>
+
+<%= turbo_stream.update "flash", partial: "shared/flash" %>

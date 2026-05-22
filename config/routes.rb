@@ -7,7 +7,10 @@ Rails.application.routes.draw do
   get "privacy-policy" => "pages#privacy_policy"
   get "contact" => "pages#contact"
   get "sitemap" => "pages#sitemap"
-  resources :pages, except: [ :index, :show ], param: :aid
+  resources :pages, except: [ :index, :show ], param: :aid do
+    # Questions
+    resources :questions, only: [ :index, :create, :update, :destroy ], param: :aid
+  end
 
   # Blocks
   resources :blocks, except: [ :index, :show ], param: :aid do

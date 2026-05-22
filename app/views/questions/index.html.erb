@@ -1,0 +1,3 @@
+<%= render partial: "questions/question", collection: @questions, as: "question" %>
+
+<%= render "shared/paging", pages: @total_pages, page: @page, page_to: page_questions_path(@mpage.aid) %>

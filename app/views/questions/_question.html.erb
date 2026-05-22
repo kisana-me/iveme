@@ -1,0 +1,53 @@
+<div id="question_<%= question.aid %>" style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; border-radius: 0.5rem;">
+  <div>
+    <span style="color: #666; font-size: 0.8em; display: block;">
+      質問
+    </span>
+    <%= question.content %>
+  </div>
+  <hr style="border: 0.1px solid #eee;">
+  <div>
+    <span style="color: #666; font-size: 0.8em; display: block;">
+      回答
+    </span>
+    <%= "回答はありません！" if question.answer.blank? %>
+    <%= question.answer %>
+  </div>
+  <hr style="border: 0.1px solid #eee;">
+  <div style="font-size: 0.8em;">
+    <span style="color: #666;">
+    <%= question.created_at.strftime("%Y年%m月%d日 %H:%M") %>
+    </span>
+    <span style="color: <%= question.read ? "#1fb227" : "#dc3545" %>;">
+      <%= question.read ? "既読" : "未読" %>
+    </span>
+  </div>
+  <details>
+    <summary>変更</summary>
+    <div>
+      <%= form_with(model: question, url: page_question_path(params[:page_aid], question.aid), local: false, class: "ctmf") do |form| %>
+        <%= render "shared/error_messages", instead: question %>
+        <%= hidden_field_tag :page_aid, (local_assigns[:page_aid] || params[:page_aid]) %>
+
+        <div>
+          <%= form.label :answer %>
+          <%= form.text_area :answer, rows: 6 %>
+        </div>
+
+        <div>
+          <%= form.label :read %>
+          <%= form.check_box :read %>
+        </div>
+
+        <div>
+          <%= form.label :visibility %>
+          <%= form.select :status, Image.visibilities.keys.map { |k| [t("activerecord.enums.image.visibility.#{k}"), k] }, {} %>
+        </div>
+
+        <div>
+          <%= form.submit "送信" %>
+        </div>
+      <% end %>
+    </div>
+  </details>
+</div>

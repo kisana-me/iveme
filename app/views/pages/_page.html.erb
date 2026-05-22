@@ -4,6 +4,7 @@
     <div class="page-owner">
       <p>あなたはこのページの所有者です。</p>
       <%= link_to "編集", edit_page_path(page.aid) %>
+      <%= link_to "質問", page_questions_path(page.aid) %>
     </div>
   <% end %>
 
@@ -13,6 +14,13 @@
 
   <div>
     <%= md_render page.description %>
+  </div>
+
+  <div id="question_form">
+    <details>
+      <summary>質問する</summary>
+      <%= render "questions/form", page_aid: page.aid, question: Question.new, url: page_questions_path(page.aid) %>
+    </details>
   </div>
 
   <div id="blocks">
