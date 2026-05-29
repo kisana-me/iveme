@@ -1,15 +1,17 @@
 Rails.application.routes.draw do
-  root "pages#index"
+  root "general_pages#index"
+
+  # GeneralPages
+  get "home" => "general_pages#home", as: :home
+  get "terms-of-service" => "general_pages#terms_of_service"
+  get "privacy-policy" => "general_pages#privacy_policy"
+  get "contact" => "general_pages#contact"
+  get "sitemap" => "general_pages#sitemap"
 
   # Pages
-  get "home" => "pages#home", as: :home
-  get "terms-of-service" => "pages#terms_of_service"
-  get "privacy-policy" => "pages#privacy_policy"
-  get "contact" => "pages#contact"
-  get "sitemap" => "pages#sitemap"
   resources :pages, except: [ :index, :show ], param: :aid do
     # Questions
-    resources :questions, only: [ :index, :create, :update, :destroy ], param: :aid
+    resources :questions, except: [ :new, :edit ], param: :aid
   end
 
   # Blocks

@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  before_action :require_signin, only: %i[ home new create edit update destroy ]
+  before_action :require_signin, only: %i[ new create edit update destroy ]
 
   def new
     @page = Page.new
@@ -64,30 +64,6 @@ class PagesController < ApplicationController
     else
       redirect_to account_page_path(@current_account.name_id, @page.name_id), alert: "ページの削除に失敗しました"
     end
-  end
-
-  def home
-    @pages = @current_account.pages.is_normal
-  end
-
-  def index
-    @document = Document.unscoped.find_by(name_id: "index", status: :specific)
-  end
-
-  def terms_of_service
-    @document = Document.unscoped.find_by(name_id: "terms_of_service", status: :specific)
-  end
-
-  def privacy_policy
-    @document = Document.unscoped.find_by(name_id: "privacy_policy", status: :specific)
-  end
-
-  def contact
-    @document = Document.unscoped.find_by(name_id: "contact", status: :specific)
-  end
-
-  def sitemap
-    @document = Document.unscoped.find_by(name_id: "sitemap", status: :specific)
   end
 
   private
