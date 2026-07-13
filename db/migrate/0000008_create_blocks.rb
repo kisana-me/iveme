@@ -8,8 +8,8 @@ class CreateBlocks < ActiveRecord::Migration[8.1]
       t.text :description, null: false, default: ""
       t.string :url, null: false, default: ""
       t.integer :position, null: false, default: 0
+      t.string :hue, null: true
       t.string :block_type, null: false, default: ""
-      t.string :style, null: false, default: ""
       t.integer :visibility, null: false, limit: 1, default: 0
       t.json :meta, null: false, default: {}
       t.integer :status, null: false, limit: 1, default: 0

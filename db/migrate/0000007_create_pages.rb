@@ -11,10 +11,11 @@ class CreatePages < ActiveRecord::Migration[8.1]
       t.string :font_family, null: true
       t.string :font_weight, null: true
       t.string :font_color, null: true
-      t.string :block_color, null: true
+      t.string :hue_1, null: true
+      t.string :hue_2, null: true
+      t.string :hue_3, null: true
       t.string :accent_color, null: true
       t.string :background_color, null: true
-      t.string :gradient_color, null: true
       t.string :page_type, null: false, default: ""
       t.integer :visibility, null: false, limit: 1, default: 0
       t.json :meta, null: false, default: {}

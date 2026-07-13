@@ -41,6 +41,7 @@
 /* ページ */
 
 .page-owner {
+  width: 100%;
   border: 1px solid #ccc;
   padding: 1rem;
   margin-bottom: 15px;

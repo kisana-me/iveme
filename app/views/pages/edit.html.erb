@@ -1,10 +1,7 @@
 <% content_for :title, "ページを編集" %>
 
 <div class="page-theme">
-
-  <h1>ページを編集</h1>
-
-  <p style="color: red;">内容を更新したら「送信」ボタンを押して確定させてください。</p>
+  <div class="page-gradient"></div>
 
   <%= render "form", page: @page, url: page_path(@page.aid) %>
 
@@ -29,6 +26,22 @@
 </div>
 
 <style>
+  .page-gradient {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    min-width: 600px;
+    z-index: -1;
+    height: 700px;
+    background-image: radial-gradient(at 0% 100%, hsl(0deg 0% 100% / 0%) 0px, transparent 50%), 
+                      radial-gradient(at 50% 100%, hsl(0deg 0% 100% / 0%) 0px, transparent 50%), 
+                      radial-gradient(at 100% 109%, hsl(0deg 0% 100% / 0%) 0px, transparent 50%), 
+                      radial-gradient(at 50% -10%, hsla(70, 78%, 69%, 1) 0px, transparent 50%), 
+                      radial-gradient(at 85% 20%, hsla(313, 98%, 69%, 1) 0px, transparent 50%), 
+                      radial-gradient(at 17% 16%, hsla(233, 82%, 64%, 1) 0px, transparent 50%);
+  }
   main {
     --page-font-color: <%= @page.font_color.presence || "#000000" %>;
     --page-block-color: <%= @page.block_color.presence || "#FFFFFF" %>;
@@ -79,14 +92,15 @@
 
   .page-theme {
     color: var(--page-font-color);
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .page-theme a {
     color: var(--page-accent-color);
-  }
-
-  .page-theme .block, .page-theme .block-form {
-    background-color: var(--page-block-color);
   }
 
   .page-theme .ctmf input[type="submit"],

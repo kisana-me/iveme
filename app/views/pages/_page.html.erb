@@ -1,12 +1,7 @@
-<div class="page-theme">
+<% provide :no_header, true %>
 
-  <% if page.account == @current_account %>
-    <div class="page-owner">
-      <p>あなたはこのページの所有者です。</p>
-      <%= link_to "編集", edit_page_path(page.aid) %>
-      <%= link_to "質問", page_questions_path(page.aid) %>
-    </div>
-  <% end %>
+<div class="page-theme">
+  <div class="page-gradient"></div>
 
   <%= image_tag(page.icon_url, alt: "#{page.title}のアイコン", class: "page-icon") %>
 
@@ -18,7 +13,7 @@
 
   <div id="question_form">
     <details>
-      <summary>質問する</summary>
+      <summary>質問asする</summary>
       <%= render "questions/form", page_aid: page.aid, question: Question.new, url: page_questions_path(page.aid) %>
     </details>
   </div>
@@ -29,9 +24,49 @@
     <% end %>
   </div>
 
+  <% if page.account == @current_account %>
+    <div class="page-owner">
+      <p>あなたはこのページの所有者です。</p>
+      <%= link_to "編集", edit_page_path(page.aid) %>
+      <%= link_to "質問", page_questions_path(page.aid) %>
+    </div>
+  <% end %>
+
 </div>
 
 <style>
+  .page-gradient1 {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: -1;
+    height: 200px;
+    min-width: 800px;
+    mask-image: linear-gradient(to bottom, #000, #0000);
+    background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(42, 123, 155, 1) 15%,
+      rgba(87, 199, 133, 1) 50%,
+      rgba(237, 221, 83, 1) 85%,
+      rgba(255, 255, 255, 0) 100%);
+  }
+  .page-gradient {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    min-width: 600px;
+    z-index: -1;
+    height: 700px;
+    background-image: radial-gradient(at 0% 100%, hsl(0deg 0% 100% / 0%) 0px, transparent 50%), 
+                      radial-gradient(at 50% 100%, hsl(0deg 0% 100% / 0%) 0px, transparent 50%), 
+                      radial-gradient(at 100% 109%, hsl(0deg 0% 100% / 0%) 0px, transparent 50%), 
+                      radial-gradient(at 50% -10%, hsla(70, 78%, 69%, 1) 0px, transparent 50%), 
+                      radial-gradient(at 85% 20%, hsla(313, 98%, 69%, 1) 0px, transparent 50%), 
+                      radial-gradient(at 17% 16%, hsla(233, 82%, 64%, 1) 0px, transparent 50%);
+}
   main {
     --page-font-color: <%= page.font_color.presence || "#000000" %>;
     --page-block-color: <%= page.block_color.presence || "#FFFFFF" %>;
@@ -82,16 +117,17 @@
 
   .page-theme {
     color: var(--page-font-color);
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .page-theme a {
     color: var(--page-accent-color);
   }
 
-  .page-theme .block {
-    background-color: var(--page-block-color);
-    border-color: var(--page-accent-color);
-  }
   .page-theme .block:hover {
     background-color: var(--page-block-color);
   }

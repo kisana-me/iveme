@@ -71,7 +71,7 @@
   </head>
 
   <body>
-
+    <% unless content_for?(:no_header).present? %>
     <header>
       <div>
         <%= link_to("iveme", root_path) %>
@@ -84,6 +84,7 @@
         <% end %>
       </div>
     </header>
+    <% end %>
 
     <main>
       <%= yield %>

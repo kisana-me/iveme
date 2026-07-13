@@ -1,11 +1,22 @@
 /* BLOCK */
 
+#blocks {
+  width: 100%;
+}
+
 .block {
   margin: 1rem 0;
   padding: 1rem;
   border: 1px solid #ccc;
   display: flex;
   flex-direction: row;
+  /* background-color: var(--page-block-color); */
+  border-color: var(--page-accent-color);
+  box-shadow: #f42c7045 7px 7px 10px 0px;
+  backdrop-filter: blur(7px);
+  background: #ffffff24;
+  border-radius: 7px;
+  transition: background-color 0.3s ease-in-out;
 }
 .block > div {
   min-width: 0;

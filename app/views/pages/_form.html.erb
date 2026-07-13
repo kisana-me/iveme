@@ -1,7 +1,7 @@
 <%= form_with(
   model: page,
   url: url,
-  class: "ctmf",
+  class: "ctmf page-form",
   data: {
     turbo: false,
     controller: "image-preview",
@@ -52,6 +52,57 @@
     <%= form.label :description %>
     <%= form.textarea :description %>
   </div>
+
+  <div data-controller="hue-input">
+    <%= form.label :page_color_1, "ページ色1" %>
+    <%= form.hidden_field :page_color_1, data: { "hue-input-target": "hidden" } %>
+    <input type="range" min="0" max="360" step="1" value="0" class="hue_input" data-hue-input-target="range" data-action="input->hue-input#pick" />
+  </div>
+
+  <style>
+    main {
+    --theme-hsl-color: #fff;
+    }
+    .hue_input {
+      appearance: none;
+      height: 12px;
+      border-radius: 2px;
+      background: linear-gradient(to right, hsl(0, 75%, 70%), hsl(60, 75%, 70%), hsl(120, 75%, 70%), hsl(180, 75%, 70%), hsl(240, 75%, 70%), hsl(300, 75%, 70%), hsl(360, 75%, 70%));
+      cursor: pointer;
+    }
+    .hue_input::-webkit-slider-thumb {
+      appearance: none;
+      width: 12px;
+      height: 20px;
+      background: var(--theme-hsl-color);
+      border-radius: 2px;
+      transition: transform 0.2s ease;
+      border: 0 solid var(--theme-hsl-color);
+      box-shadow: 0px 4px 5px -2px var(--theme-hsl-color);
+    }
+    .hue_input::-moz-range-thumb {
+      appearance: none;
+      width: 12px;
+      height: 20px;
+      background: var(--theme-hsl-color);
+      border-radius: 2px;
+      transition: transform 0.2s ease;
+      border: 0 solid var(--theme-hsl-color);
+      box-shadow: 0px 4px 5px -2px var(--theme-hsl-color);
+    }
+    .hue_input:hover::-webkit-slider-thumb {
+      transform: scale(1.15);
+    }
+    .hue_input:hover::-moz-range-thumb {
+      transform: scale(1.15);
+    }
+    .hue_input:active::-webkit-slider-thumb {
+      transform: scale(1.15);
+    }
+    .hue_input:active::-moz-range-thumb {
+      transform: scale(1.15);
+    }
+  </style>
 
   <div>
     <%= form.label :font_color, "文字色" %>
@@ -122,3 +173,17 @@
     <%= form.submit "送信" %>
   </div>
 <% end %>
+
+<style>
+  .page-form {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .page-form > div {
+    width: 100%;
+  }
+</style>
